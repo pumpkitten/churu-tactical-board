@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>チュール式戦術ボード｜作戦会議</title>
+<style>
+:root{color-scheme:dark;--bg:#101820;--panel:#1b2937;--border:#35495c;--ink:#edf4fb;--dim:#b2c2d0;--gold:#f0c566;--blue:#5aaafa;--red:#ff8383}*{box-sizing:border-box}[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}header{border-bottom:1px solid var(--border);background:#142331}header .wrap{max-width:1500px;margin:auto;display:flex;gap:16px;align-items:center;justify-content:space-between;padding:14px 20px;flex-wrap:wrap}h1{font-size:21px;margin:0}h2{font-size:17px;margin:2px 0 14px}h3{font-size:15px;margin:0 0 10px}.sub,.muted{color:var(--dim);font-size:12px}strong{color:var(--gold)}.label{font-weight:650;color:#dbe9f5}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{min-width:0}button,input,select,textarea{font:inherit;color:var(--ink);background:#253849;border:1px solid #4a6277;border-radius:9px;padding:8px 10px}button{cursor:pointer;white-space:normal}button:hover{filter:brightness(1.15)}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:1px}button.active,.primary{background:#efc66e;color:#172331;font-weight:750;border-color:#efc66e}button.danger{border-color:#98545a;color:#ffd7d7}button.ghost{background:#172631}.small{padding:5px 9px;font-size:12px}.stretch{flex:1}.group{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.stack{display:grid;gap:9px}.field{display:grid;gap:5px}.field input[type=number],.field input[type=text],.field select{width:100%}input[type=range]{width:100%;accent-color:var(--gold)}input[type=checkbox]{accent-color:var(--gold);width:16px;height:16px}.layout{max-width:1500px;margin:auto;padding:16px 20px;display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:16px;align-items:start}.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:15px;margin-bottom:12px}.stage{position:relative;overflow:hidden;background:#111d27;border:1px solid #465769;border-radius:11px}.stage canvas{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair}.stage-help{background:#152532;border:1px solid var(--border);border-radius:8px;padding:9px 11px;margin:9px 0;color:#d3e2eb;font-size:13px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.tabs button.active{outline:1px solid #fff5cf}.clock{font-variant-numeric:tabular-nums;font-weight:800;color:var(--gold);font-size:19px;min-width:74px;text-align:center}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.toolrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.toolrow button{font-size:12px;padding:9px 4px}.sideline{display:flex;justify-content:space-between;align-items:center;gap:8px}.separator{height:1px;background:var(--border);margin:15px 0}.counter{background:#24394b;padding:2px 9px;border-radius:10px;font-size:12px}.list{max-height:270px;overflow-y:auto;display:grid;gap:5px;padding-right:3px}.unitrow{display:grid;grid-template-columns:22px minmax(0,1fr) 44px 40px;align-items:center;gap:8px;background:#243544;border:1px solid transparent;border-radius:8px;padding:5px 8px}.unitrow.selected{border-color:var(--gold);background:#354151}.unitrow button{padding:4px 6px;text-align:left;background:none;border:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.unitrow .kind{font-size:11px;color:var(--dim)}.unitrow.off{opacity:.58}.unitrow button:disabled{cursor:not-allowed}.unitrow .unit-delete{min-height:34px;text-align:center;background:#462b34;border:1px solid #9b5962;border-radius:8px;color:#ffe0e0;font-size:16px;font-weight:750;padding:5px;line-height:1}.unitrow .unit-delete:hover{background:#733747}.hit-picker{position:absolute;z-index:10;max-width:min(280px,calc(100% - 16px));min-width:205px;max-height:260px;overflow:auto;background:#1b2937;border:2px solid #f0c566;border-radius:12px;box-shadow:0 8px 26px #000a;padding:10px}.hit-picker .picker-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hit-picker .picker-head button{padding:2px 8px}.hit-picker .picker-choice{width:100%;text-align:left;display:block;margin:5px 0;padding:9px 8px}.hit-picker .picker-choice.danger{color:#ffe0e0}.chip{font-size:12px;background:#304658;border:1px solid #536b7d;border-radius:8px;padding:6px 8px;cursor:pointer}.chip.active{background:var(--gold);color:#19222d}.waititem{background:#263b4d;border-radius:8px;border:1px solid #416076;display:flex;justify-content:space-between;gap:9px;padding:6px;align-items:center}.waititem.active{border-color:var(--gold)}.waititem button{padding:5px 7px;font-size:12px}.waititem .primaryText{flex:1;text-align:left}.info{color:#cbdce7;font-size:12px}.alert{padding:9px 11px;border-radius:10px;background:#283c48;border-left:3px solid var(--gold);min-height:37px;font-size:12px}aside .card{padding:13px}aside{min-width:0}.footer{font-size:12px;color:var(--dim);padding:8px 4px 18px}.badge{padding:3px 8px;border:1px solid #6b7280;border-radius:15px;color:#d5e8fa;font-size:11px}.statusIcon{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}.togglelabel{display:flex;gap:6px;align-items:center;font-size:12px}.w100{width:100%}label{font-weight:600}button:disabled,input:disabled{opacity:.5;cursor:default}@media(max-width:950px){.layout{grid-template-columns:1fr}.layout aside{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.layout aside .card{margin:0}.layout aside .card:nth-child(3){grid-row:span 2}}@media(max-width:640px){.layout{padding:10px}.layout aside{display:block}.layout aside .card{margin-bottom:10px}header .wrap{padding:12px 10px}.toolrow{grid-template-columns:repeat(3,minmax(0,1fr))}.card{padding:11px}h1{font-size:18px}.mobileblock{width:100%}}
+
+/* v0.4 / v0.5 meeting controls */
+.meetingbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;background:#213648;padding:10px;border:1px solid #507084;border-radius:11px;margin-bottom:12px}
+.meetingbar .row{gap:6px}.meetingbar button{min-height:36px}.modepair{display:flex;gap:6px;flex-wrap:wrap}.modepair button.active{background:#f0c566;color:#142331;font-weight:800}
+.quickbar{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:0 0 8px}.quickbar button{padding:8px 12px}.quickbar button.active{background:#efc66e;color:#172331;font-weight:800}
+#advancedTools{border:1px solid #445d70;padding:8px;border-radius:9px;margin:7px 0 9px;background:#1a3040}#advancedTools summary{cursor:pointer;color:#d8e7f5;font-weight:650;padding:3px}
+#advancedTools .toolrow{margin-top:9px}.focus-map header,.focus-map aside,.focus-map .title-card,.focus-map .footer{display:none!important}
+.focus-map .layout{max-width:none;display:block;padding:7px}.focus-map .map-card{padding:9px;margin:0}.focus-map .meetingbar{margin-bottom:7px}.focus-map .stage-help{margin:6px 0;padding:5px 8px}.focus-map .stage{max-height:calc(100dvh - 220px)}
+.stage{touch-action:none;overscroll-behavior:contain}.stage canvas{transform-origin:0 0;cursor:grab}.stage canvas.dragging{cursor:grabbing}
+.mini-switches{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.mini-switches label{font-weight:500;font-size:12px;white-space:nowrap}
+.zoomrow{display:flex;gap:4px;align-items:center}.zoomrow button{min-width:35px;padding:7px}#zoomLabel{font-size:12px;color:#dce5ef;min-width:40px;text-align:center}
+.focus-map .meetingbar{font-size:12px}.focus-map #notice{margin-top:7px!important}.meeting-only,.playback-only{display:none!important}
+body[data-mode="meeting"] .meeting-only{display:flex!important}body[data-mode="playback"] .playback-only{display:flex!important}
+@media(max-width:640px){.meetingbar{padding:8px;gap:7px}.quickbar button{padding:7px 9px}.zoomrow button{min-width:28px}.focus-map .stage{max-height:calc(100dvh - 245px)}}
+/* v0.5: selection, plan workspace and history */
+.workspace{display:grid;gap:9px;grid-template-columns:minmax(160px,1fr) auto;background:#172d3d;border:1px solid #4b6d82;padding:11px;margin-bottom:10px;border-radius:11px}
+.workspace .select-plan{width:100%;min-width:0}
+.workspace .actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.workspace .actions button{font-size:12px;padding:7px 10px}
+#autosaveStatus{color:#cbdbe9;font-size:12px;padding:1px 3px}
+.groupbar{border:1px solid #41647b;background:#1b3345;padding:8px;border-radius:9px;margin-bottom:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.groupbar button{padding:6px 9px;font-size:12px}.groupbar .selected-count{font-weight:700;color:#ffe0a2}
+.groupbar .active{background:#efc66e;color:#172331;font-weight:700}
+.unitrow{grid-template-columns:20px 22px minmax(0,1fr) 44px 40px}.unitrow .multi{width:16px;height:16px}
+.history-buttons{display:flex;gap:7px;flex-wrap:wrap}.history-buttons button{font-size:12px}
+.focus-map .workspace{display:flex;align-items:center;flex-wrap:wrap;padding:6px;margin-bottom:6px;gap:6px}
+.focus-map .workspace .actions{display:flex}.focus-map .workspace .actions button{padding:5px 7px}
+.focus-map .groupbar{margin-bottom:6px;padding:6px}
+@media(max-width:670px){.workspace{grid-template-columns:1fr}.unitrow{grid-template-columns:20px 22px minmax(0,1fr) 33px 34px;gap:5px;padding:5px}.groupbar{gap:5px}}
+
+/* v0.5.1: focus map must fit both axes (previous max-height clipped the bottom). */
+.focus-map .stage{max-height:none!important;width:100%;margin-inline:auto}
+.focus-map .stage-help,.focus-map .groupbar .muted{display:none!important}
+.focus-map #advancedTools:not([open]){display:none!important}
+.focus-map .map-card{min-width:0;padding:7px}
+.focus-map .workspace,.focus-map .meetingbar,.focus-map .groupbar,.focus-map .quickbar,.focus-map .display-toggles-row{
+  flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:thin;overscroll-behavior-x:contain;
+}
+.focus-map .workspace{gap:8px}
+.focus-map .workspace .field{flex:0 0 160px}
+.focus-map .workspace .field label{display:none}
+.focus-map .workspace .actions{flex:0 0 auto;flex-wrap:nowrap}
+.focus-map .workspace .actions button{white-space:nowrap;flex:none}
+.focus-map .meetingbar{margin-bottom:5px;padding:6px;gap:8px}
+.focus-map .meetingbar .row,.focus-map .meetingbar .modepair{flex-wrap:nowrap}
+.focus-map .groupbar{margin-bottom:5px;padding:5px}
+.focus-map .quickbar{gap:5px;margin-bottom:5px}
+.focus-map .quickbar button{padding:5px 7px;white-space:nowrap;flex:none}
+.focus-map .display-toggles-row{gap:10px;margin-bottom:5px!important}
+.focus-map .display-toggles-row .mini-switches{flex-wrap:nowrap;min-width:max-content}
+.focus-map .display-toggles-row .zoomrow{flex:none}
+.focus-map #advancedTools[open]{margin:4px 0}
+@media(max-width:640px){
+  .focus-map .workspace .field{flex-basis:120px}
+  .focus-map .meetingbar button{padding:5px 8px;white-space:nowrap}
+  .focus-map .map-card{padding:5px}
+}
+
+/* v0.6: dedicated special icon roster */
+.special-card{border-color:#776549;background:linear-gradient(180deg,#243443,#1b2937)}
+.special-add-row button{flex:1;min-width:74px}
+#specialList{max-height:210px}
+#specialTypeRow{background:#263b4d;border:1px solid #4b6b7b;border-radius:9px;padding:9px}
+#specialList .unitrow{grid-template-columns:20px 22px minmax(0,1fr) 44px 40px}
+#specialList .unitrow .kind{white-space:nowrap}
+@media(max-width:670px){#specialList .unitrow{grid-template-columns:20px 22px minmax(0,1fr) 33px 34px;gap:5px}}
+
+/* v0.6.1: token context actions, opened by right-click or touch hold. */
+.wait-context{position:fixed;z-index:1000;width:min(340px,calc(100vw - 20px));max-height:min(650px,calc(100dvh - 20px));overflow-y:auto;background:#192b3c;border:2px solid #f0c566;border-radius:13px;box-shadow:0 12px 35px #000b;padding:13px;touch-action:pan-y;overscroll-behavior:contain}
+.wait-context .wc-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}
+.wait-context .wc-head strong{color:#ffe2a1;min-width:0;overflow-wrap:anywhere}
+.wait-context .wc-section{border-top:1px solid #425869;margin-top:10px;padding-top:10px}
+.wait-context label{display:block;margin:5px 0 3px;font-size:12px;color:#d6e4f1}
+.wait-context input[type=number],.wait-context select{width:100%;min-height:37px}
+.wait-context .wc-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:7px 0}
+.wait-context .wc-row button{flex:1;min-width:62px}
+.wait-context .wc-presets{display:flex;gap:5px;margin:6px 0;flex-wrap:wrap}
+.wait-context .wc-presets button{flex:1;min-width:50px;padding:6px 4px;font-size:12px}
+.wait-context .wc-note{font-size:12px;color:#c2d7e5;line-height:1.5}
+.wait-context .wc-primary{width:100%;background:#f0c566;color:#142331;font-weight:750}
+.wait-context .wc-danger{border-color:#a45563;color:#ffe2e2}
+@media(max-width:600px){.wait-context{padding:11px;max-height:calc(100dvh - 16px)}.wait-context button{min-height:38px}}
+
+/* v0.7: action events and time rail */
+.time-rail{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:9px 10px;margin-top:10px;background:#1a3040;border:1px solid #42637a;border-radius:10px}
+.time-rail #actionSeek{flex:1;min-width:130px}.time-rail .time-number{width:84px;min-height:36px}
+.time-rail strong{color:#ffe1a1}.time-rail button{padding:6px 9px;font-size:12px}
+#outRoster{background:#1b2c39;border:1px solid #668097;border-radius:10px;padding:10px;margin-top:6px;max-height:190px;overflow-y:auto}
+.outrow{display:flex;align-items:center;gap:9px;justify-content:space-between;padding:6px 2px;border-bottom:1px solid #355064}
+.outrow span{min-width:0;flex:1}.outrow button{padding:5px 8px;font-size:12px}
+.eventitem{background:#253d50;border:1px solid #48687d;padding:9px;border-radius:9px;margin:7px 0}
+.eventitem .event-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px}
+.eventitem .event-title strong{font-size:13px;color:#ffe1a1}
+.eventitem input[type=number]{width:85px;max-width:100%;padding:6px}
+.eventitem .row button{font-size:12px;padding:5px 8px}
+.eventitem .event-meta{font-size:12px;color:#c5d6e1;margin-top:5px}
+#pendingHelp{padding:8px 11px;background:#524325;border:1px solid #e8be6c;border-radius:9px;margin-top:6px}
+.wc-action-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:7px}.wc-action-buttons button{white-space:normal}
+.focus-map .time-rail{margin-top:5px;padding:5px}.focus-map #outRoster{max-height:105px}
+.focus-map .time-rail .rail-notes{display:none}
+@media(max-width:640px){.time-rail #actionSeek{order:5;width:100%;flex-basis:100%}.wc-action-buttons{grid-template-columns:1fr 1fr}}
+
+/* ---- Churu visual system · version only in footer ---- */
+:root{color-scheme:dark;--bg:#090f19;--panel:#131e2c;--border:#2b3b51;--ink:#eaf2fa;--dim:#97aabe;--gold:#79e3ce;--blue:#78adff;--red:#ff8599;--soft:#1a2a3c}
+body{background:radial-gradient(ellipse 850px 430px at 0% -10%,rgba(51,99,145,.19),transparent 80%),radial-gradient(ellipse 620px 520px at 93% 0%,rgba(31,113,107,.08),transparent 77%),#090f19;color:var(--ink);font-family:Inter,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;line-height:1.55;letter-spacing:.005em}
+.app-header{border-bottom:1px solid rgba(144,173,200,.13);background:rgba(11,19,30,.88)}
+.app-header .wrap{max-width:1660px;padding:13px 25px;gap:12px;flex-wrap:nowrap}
+.brand-head{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-logo{width:40px;height:40px;flex:0 0 40px;display:grid;place-items:center;background:linear-gradient(137deg,#81e9d1,#4bafcf);color:#0b2836;border:1px solid #8cf7e2;border-radius:12px;box-shadow:0 5px 22px rgba(48,207,179,.15);font-size:19px;font-weight:900}
+.brand-copy{min-width:0}.brand-copy h1{font-size:20px;letter-spacing:.045em;line-height:1.4;font-weight:800;white-space:nowrap}
+.brand-caption{color:#9baec0;font-size:11px;letter-spacing:.07em;margin-top:2px}
+.header-meta{display:flex;align-items:center;gap:8px;letter-spacing:.16em;font-size:10px;color:#657f99;font-weight:750;white-space:nowrap}
+.meta-dot{width:7px;height:7px;border-radius:50%;background:#77d6c6;box-shadow:0 0 12px #53dbc18c}
+.layout{max-width:1660px;padding:22px 24px 12px;grid-template-columns:minmax(0,1fr) 344px;gap:18px}
+.card{border:1px solid #26394d;border-radius:16px;background:linear-gradient(170deg,rgba(23,36,51,.98),rgba(16,28,40,.98));box-shadow:0 9px 35px rgba(0,0,0,.11);padding:17px;margin-bottom:14px}
+.layout .map-card{background:#111c2a;border-color:#2b4054;padding:17px;box-shadow:0 15px 42px rgba(0,0,0,.22)}
+.title-card{background:linear-gradient(105deg,#152839,#112032);border-color:#30495e;padding:12px 16px}
+.title-card .field{display:flex;align-items:center;gap:12px}.title-card .field label{font-size:12px;white-space:nowrap;color:#abc1cf}.title-card input{width:min(100%,650px);background:#0c1b2b;border-color:#34475a;font-size:14px}
+.title-card .muted{white-space:nowrap;font-size:11px;color:#739c9a}
+button,input,select,textarea{font-family:inherit;background:#1b2e42;border:1px solid #3c5064;border-radius:9px;color:#dceaf7;transition:background .16s ease,border-color .16s ease,box-shadow .16s ease}
+button{font-weight:620}button:hover:not(:disabled){filter:none;background:#2a435a;border-color:#68869a;box-shadow:0 4px 13px #020b1599}
+button:active:not(:disabled){transform:translateY(1px)}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #87e7cf;outline-offset:2px}
+.primary,button.active,.modepair button.active,.quickbar button.active,.groupbar .active,.chip.active{color:#082a35;background:linear-gradient(145deg,#9af2d9,#57d6cb);border-color:#74e1d3;font-weight:790}
+.primary:hover:not(:disabled),button.active:hover:not(:disabled),.modepair button.active:hover:not(:disabled),.quickbar button.active:hover:not(:disabled){background:linear-gradient(145deg,#a1ffe9,#76eadb);border-color:#a4ffeb}
+button.danger{border-color:#7b5260;color:#ffc2cb}
+strong,.clock,.time-rail strong,.eventitem .event-title strong{color:#a4f4df}
+label,.label{color:#c4d3e2}
+h2{font-size:15px;font-weight:810;letter-spacing:.025em;margin:0 0 12px}h3{font-size:14px}
+.muted,.sub,.info{color:#a1b3c3}
+.counter,.badge{background:#223448;border:1px solid #345268;color:#bbcede;border-radius:40px;font-size:11px}
+/* Prominent discoverable source section in the sidebar */
+.map-source-card{position:relative;border-color:#35696d!important;background:linear-gradient(150deg,rgba(29,69,78,.98),rgba(16,35,48,.98))!important;overflow:hidden}
+.map-source-card:before{content:"";position:absolute;inset:-80px -65px auto auto;width:220px;height:220px;border:1px solid rgba(113,231,205,.12);border-radius:50%;box-shadow:0 0 0 36px rgba(100,212,197,.035),0 0 0 72px rgba(100,212,197,.025);pointer-events:none}
+.section-kicker{display:flex;align-items:center;gap:7px;color:#9aede1;font-weight:850;font-size:10px;letter-spacing:.2em;position:relative}.kicker-bar{width:4px;height:11px;border-radius:4px;background:#74e0d2}.step-tag{margin-left:auto;opacity:.54}.map-source-card h2{font-size:18px;margin:9px 0 6px}.source-hint{color:#b2c8d3;font-size:12px;margin:0 0 15px;line-height:1.7;position:relative}
+button.source-upload{display:flex;align-items:center;text-align:left;gap:11px;width:100%;padding:12px 14px;border-radius:12px;border:1px solid #75dfc9;background:linear-gradient(120deg,#8fead9,#65cfd2);color:#062a38;box-shadow:0 8px 20px rgba(69,209,192,.15);position:relative}
+button.source-upload:hover{background:#aefff0;color:#062a38;border-color:#bbffec}.source-upload b{display:block;font-size:14px}.source-upload small{font-size:10px;display:block;font-weight:550;opacity:.75}.upload-icon{font-size:24px;line-height:1}.upload-chevron{font-size:20px;margin-left:auto}
+.source-settings{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:15px 0 9px}.source-settings label{font-size:12px;color:#c3d7da}.source-settings select{width:55%;background:#142d3a;border-color:#3d626b}
+.source-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:7px}.source-shortcuts button{font-size:11px;padding:8px 5px;background:#172e3d}.source-shortcuts #loadTop{grid-column:1/-1;background:rgba(36,75,82,.68);border:1px solid #3e6d72;color:#cfefe8}
+/* Main command workspace */
+.workspace{border-radius:12px;background:linear-gradient(90deg,#15283a,#152437);border-color:#31495c;padding:11px 12px;gap:10px}
+.workspace .field label{font-size:12px;color:#a9c9d2}.workspace .actions button{font-size:11px;padding:7px 9px}.workspace .field select{font-weight:760;border-color:#466877;background:#1b3544}
+#autosaveStatus{font-size:11px;color:#8fd9be}
+.meetingbar{border-radius:12px;border-color:#344d60;background:#122538;padding:9px 11px;margin-bottom:11px}
+.modepair{padding:3px;border-radius:10px;background:#0a1928;gap:3px;border:1px solid #253d54}
+.modepair button{background:transparent;border-color:transparent;border-radius:8px;padding:8px 12px}
+.modepair button.active{box-shadow:0 3px 10px rgba(62,205,188,.16)}
+.meetingbar #focusMap{border-color:#447485;background:#213949}.meetingbar #quickSave{border-color:#446374}
+.groupbar{background:rgba(15,34,49,.95);border:1px solid #2b465b;padding:8px;border-radius:11px}.groupbar .selected-count{color:#a2e8d6}
+.quickbar{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin-bottom:11px}
+.toolcluster{min-width:0;border:1px solid #2a4055;background:#122334;border-radius:11px;padding:6px 7px 8px;display:flex;flex-direction:column;gap:6px;flex:1 1 180px}
+.tool-label{font-size:10px;color:#789ab3;letter-spacing:.1em;font-weight:760;padding:0 4px;text-transform:uppercase}
+.cluster-buttons{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.toolcluster button{font-size:11px;padding:6px 8px;border-radius:7px;min-height:30px}
+.toolcluster.minor-cluster{flex-basis:210px}
+.mini-switches label{color:#b8cfda;display:flex;align-items:center;gap:3px}
+.display-toggles-row{padding:6px 5px 3px}
+#advancedTools{background:#122435;border-color:#2a4054;border-radius:10px}
+#advancedTools summary{color:#9bbaD0;font-size:12px}
+.stage-help{border:0;background:transparent;color:#93afc0;padding:5px 2px;margin:0 0 6px;font-size:11px}
+.map-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;background:#102233;border:1px solid #2f465a;border-bottom:0;border-radius:13px 13px 0 0}
+.map-heading-title{display:flex;align-items:center;gap:9px}.canvas-eye{color:#74e2ce;font-size:23px}
+.map-caption{color:#a1eedb;font-size:10px;letter-spacing:.16em;font-weight:850;display:block}.map-description{font-size:11px;color:#b3c5d3;display:block}
+#mapStageChoose{font-size:11px;color:#c6ebe7;border:1px solid #426979;background:#203c4c;padding:6px 12px}
+.stage{background:#091421;border:1px solid #385166;border-radius:0 0 13px 13px}
+.stage canvas{background-color:#0c1c2a}
+.time-rail{background:#12283b;border-color:#2e5161;border-radius:12px;margin-top:12px}
+.time-rail .time-number{background:#091e2c}.clock{font-size:19px}.alert{background:#173144;border-left-color:#71e1d1;color:#c7e7ee}
+.unitrow{background:#1c3144;border:1px solid #2a4154;border-radius:10px}.unitrow.selected{border-color:#76d6c6;background:#224248;box-shadow:inset 3px 0 0 #78e4d5}.unitrow .unit-delete{background:#3e2532;border-color:#805362}
+.list{scrollbar-color:#3f6173 transparent}
+.special-card{background:linear-gradient(150deg,#182e3f,#142334);border-color:#46576b}
+#specialTypeRow{background:#22384a;border-color:#3b6070}
+.waititem,.eventitem{background:#1b3549;border-color:#37596a}.wait-context{background:#142436;border:1px solid #69cbbb;box-shadow:0 25px 65px #000c}
+.hit-picker{background:#182b3b;border-color:#83e4d4}
+.app-footer{max-width:1660px;margin:0 auto 14px;padding:7px 25px;display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid #25374a;color:#7e99aa;font-size:11px}
+.app-version{color:#61798c;font-size:10px;letter-spacing:.02em;white-space:nowrap}
+/* Theater mode: remain edge-to-edge; make toolbar horizontally scrollable and preserve map height. */
+.focus-map .app-header,.focus-map aside,.focus-map .title-card,.focus-map .app-footer{display:none!important}
+.focus-map .layout{max-width:none;padding:6px}.focus-map .layout .map-card{padding:6px}
+.focus-map .toolcluster{flex:0 0 auto;padding:3px 5px;flex-direction:row;gap:5px;align-items:center;border-radius:7px}.focus-map .tool-label{font-size:9px;white-space:nowrap}.focus-map .cluster-buttons{flex-wrap:nowrap}.focus-map .toolcluster button{padding:5px 7px;min-height:27px;white-space:nowrap}
+.focus-map .map-heading{padding:5px 10px}.focus-map .map-description{display:none}.focus-map .stage-help{display:none!important}
+.focus-map .quickbar{flex-wrap:nowrap;overflow-x:auto}.focus-map .map-caption{font-size:9px}
+@media (max-width:1140px){.layout{grid-template-columns:minmax(0,1fr) 320px;gap:12px;padding:14px}.toolcluster{flex-basis:190px}}
+@media (max-width:950px){.layout{grid-template-columns:1fr}.layout aside{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.layout aside .card{margin:0}.layout aside .map-source-card{grid-column:1/-1}.layout aside .card:nth-child(3){grid-row:auto}}
+@media (max-width:670px){.app-header .wrap{padding:11px 13px}.header-meta{display:none}.brand-logo{width:34px;height:34px;flex-basis:34px}.brand-copy h1{font-size:17px}.brand-caption{font-size:10px}.layout{padding:9px}.layout aside{display:block}.layout aside .card{margin-bottom:10px}.title-card .row{flex-wrap:wrap}.title-card .muted{display:none}.toolcluster{flex-basis:145px}.toolcluster.minor-cluster{flex-basis:100%}.map-heading{padding:8px}.map-description{display:none}.app-footer{padding:10px 13px;align-items:start;flex-wrap:wrap}.workspace{grid-template-columns:1fr}.map-card{padding:10px!important}}
+
+/* Meeting first: keep the map close to the top, with a short one-line control strip. */
+.workspace{display:flex;align-items:center;flex-wrap:nowrap;gap:8px;overflow-x:auto;padding:7px 9px;scrollbar-width:thin}
+.workspace .field{flex:0 0 172px}.workspace .field label{display:none}.workspace .actions{flex-wrap:nowrap;flex:0 0 auto;gap:5px}
+.workspace .actions button{white-space:nowrap;padding:6px 8px}.workspace #autosaveStatus{white-space:nowrap}
+.quickbar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:4px;overscroll-behavior-x:contain}
+.toolcluster,.toolcluster.minor-cluster{flex:0 0 auto;flex-direction:row;align-items:center;gap:5px;min-width:0;padding:5px 7px;white-space:nowrap}
+.tool-label{font-size:9px;letter-spacing:.05em;white-space:nowrap}.cluster-buttons{flex-wrap:nowrap}
+.toolcluster button{padding:6px 9px;min-height:31px;white-space:nowrap}
+.map-heading{margin-top:4px}
+.display-toggles-row{margin-bottom:5px!important}
+.groupbar{margin-top:12px}.groupbar .muted{display:none}
+.layout > div,.layout > aside,.layout .map-card,.workspace,.quickbar{min-width:0;max-width:100%}
+@media(max-width:950px){.layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:670px){.workspace .field{flex-basis:155px}.toolcluster{padding:4px}.toolcluster button{padding:5px 7px}.quickbar{overflow-x:auto}}
+
+</style></head><body>
+<header class="app-header"><div class="wrap">
+  <div class="brand-head"><span class="brand-logo" aria-hidden="true">チ</span><div class="brand-copy">
+    <h1>チュール式戦術ボード</h1><div class="brand-caption">一緒に考え、動かして、作戦を形に。</div>
+  </div></div>
+  <div class="header-meta" aria-hidden="true"><span class="meta-dot"></span> TACTICAL WORKSPACE</div>
+</div></header>
+<div class="layout"><div>
+<div class="card title-card"><div class="row" style="justify-content:space-between"><div class="field stretch"><label for="title">作戦名</label><input id="title" type="text" placeholder="例：中央砦 攻防シミュレーション" maxlength="80"></div><div class="muted" style="align-self:end">ブラウザ内だけで動作・サーバー送信なし</div></div></div>
+<div class="card map-card">
+<div class="meetingbar">
+  <div class="modepair"><button id="modeMeeting" class="active" type="button">♟ 作戦会議</button><button id="modePlayback" type="button">▶ 作戦再生</button></div>
+  <div class="row"><button id="focusMap" type="button">⛶ マップを大きく</button><button id="quickSave" type="button">💾 保存</button></div>
+</div>
+<div class="workspace" aria-label="作戦案の管理">
+  <div class="field"><label for="planPicker">作戦案（切り替え・比較）</label><select id="planPicker" class="select-plan"></select></div>
+  <div class="actions"><button id="planDuplicate" type="button">⧉ この案を複製</button><button id="planNew" type="button">＋ 白紙案</button><button id="planRename" type="button">✎ 名前変更</button><button id="planDelete" class="danger" type="button">🗑 案を削除</button><button id="restoreAutosave" type="button" title="保存された作業に戻す">♻ 自動保存を復元</button><span id="autosaveStatus" aria-live="polite">自動保存の確認中…</span></div>
+</div>
+<div class="quickbar" role="toolbar" aria-label="戦術ボードの操作ツール">
+<div class="toolcluster"><span class="tool-label">駒の追加</span><div class="cluster-buttons"><button id="quickAddFriend" type="button">＋ 味方</button><button id="quickAddEnemy" type="button">＋ 敵</button><button id="quickAddBoss" type="button">◆ 総大将</button><button id="quickAddStrong" type="button">◇ 強敵</button><button id="quickAddSiege" type="button">▣ 井闌車</button></div></div>
+<div class="toolcluster"><span class="tool-label">移動・ルート</span><div class="cluster-buttons"><button class="active" data-quick="move" type="button">✋ 駒を動かす</button><button data-quick="route" type="button">✎ 進軍線</button><button data-quick="extend" type="button">＋ 線を延長</button><button id="quickPause" type="button">⏸ 待機／解除</button></div></div>
+<div class="toolcluster"><span class="tool-label">説明ツール</span><div class="cluster-buttons"><button data-quick="pen" type="button">✎ 手書き</button><button data-quick="inkEraser" type="button">⌫ 手書き消しゴム</button><button data-quick="pointer" type="button">◎ ポインター</button></div></div>
+<div class="toolcluster minor-cluster"><span class="tool-label">整理</span><div class="cluster-buttons"><button data-quick="erase" type="button">🗑 駒削除</button><button id="resetLive" type="button">↩ 仮配置を戻す</button><button id="commitLive" type="button">📍 現在位置を初期配置に確定</button></div></div>
+</div>
+<div class="row display-toggles-row" style="justify-content:space-between;margin-bottom:7px">
+  <div class="mini-switches">
+    <label><input type="checkbox" id="viewNames" checked> 名前</label>
+    <label><input type="checkbox" id="viewStates"> 状態</label>
+    <label><input type="checkbox" id="viewNumbers"> 人数</label>
+    <label><input type="checkbox" id="viewRoutes"> ルート</label>
+    <label><input type="checkbox" id="viewFriend" checked> 味方</label>
+    <label><input type="checkbox" id="viewEnemy" checked> 敵</label><label><input type="checkbox" id="viewSpecial" checked> 特殊</label>
+  </div>
+  <div class="zoomrow"><button id="zoomOut" title="縮小" type="button">－</button><span id="zoomLabel">100%</span><button id="zoomIn" title="拡大" type="button">＋</button><button id="zoomReset" type="button">等倍</button></div>
+</div>
+<div class="map-heading"><div class="map-heading-title"><span class="canvas-eye">◈</span><div><span class="map-caption">TACTICAL MAP</span><span class="map-description">マップ上で駒をドラッグして配置</span></div></div><button id="mapStageChoose" type="button" title="マップ画像を変更する">▧ マップ画像を選択・変更</button></div>
+<div class="stage" id="mapStage"><canvas id="map" width="1200" height="800" aria-label="戦術マップ"></canvas><div id="hitPicker" class="hit-picker" hidden role="group" aria-label="重なったアイコンの選択"></div></div>
+<div class="time-rail" aria-label="作戦の時間指定">
+ <strong>⏱ 作戦時刻</strong><input id="actionTime" class="time-number" type="number" min="0" max="3600" step="0.5" value="0" aria-label="作戦時刻（秒）"><span>秒</span>
+ <input id="actionSeek" type="range" min="0" max="12" step="0.5" value="0" aria-label="作戦時刻の移動">
+ <button type="button" id="outRosterToggle">👻 退場中 <span id="outCount">0</span></button>
+ <label class="togglelabel"><input id="ghostToggle" type="checkbox"> 退場中を半透明表示</label>
+ <span class="muted rail-notes">駒を右クリック／長押し → 退場・再出現。時刻を戻せば表示も戻ります。</span>
+</div>
+<div class="groupbar" aria-label="複数部隊の一括操作">
+ <button id="multiMode" type="button" aria-pressed="false">☑ 複数選択：OFF</button>
+ <span id="selectedCount" class="selected-count">0部隊選択</span>
+ <button id="selectAllVisible" type="button">表示中を全選択</button><button id="clearSelection" type="button">選択解除</button>
+ <button id="resetSelected" type="button">選択を元の配置へ</button>
+ <span class="muted">複数選択ONなら駒を順にタップ。選択した駒はまとめてドラッグできます。PCはShift＋クリックでも追加。</span>
+</div>
+<details id="advancedTools"><summary>その他のツール／初期位置・待機地点の編集</summary><div class="toolrow" id="tools"><button data-tool="route">✎ 進軍ルート</button><button data-tool="extend">＋ ルート延長</button><button data-tool="inkEraser">⌫ 手書きのみ消す</button><button data-tool="pointer">◎ レーザーポインター</button><button data-tool="move">✋ 仮配置移動</button><button data-tool="select">☝ 駒を選択</button><button data-tool="wait">⏸ 待機を配置</button><button data-tool="place">📍 初期位置を設定</button><button data-tool="pen">～ 自由線</button><button data-tool="note">Ｔ 文字</button><button data-tool="ring">◎ 強調</button><button data-tool="boss">◆ 敵総大将</button><button data-tool="strong">◇ 強敵</button><button data-tool="erase">🗑 アイコン削除</button><button data-tool="siege">▣ 井闌車</button></div></details>
+<div class="stage-help" id="help">【会議モード】駒をドラッグ＝仮移動。PCは駒を右クリック、スマホは約0.6秒長押しで待機時間を設定できます。</div>
+<div id="pendingHelp" hidden><span id="pendingText"></span> <button id="pendingCancel" type="button">✕ 取り消す</button></div>
+<div id="outRoster" hidden aria-label="退場中の駒一覧"></div>
+<div class="row playback-only" style="margin-top:12px"><button id="play" class="primary">▶ 再生</button><button id="pause">Ⅱ 停止</button><button id="reset">↺ 先頭</button><span class="clock" id="clock">0.0秒</span><span class="muted" id="length">/ 12秒</span><select id="rate" aria-label="再生速度"><option value=".5">0.5倍</option><option value="1" selected>1倍</option><option value="2">2倍</option><option value="4">4倍</option><option value="8">8倍</option></select></div>
+<input class="playback-only" id="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="再生位置">
+<div class="row" style="margin-top:12px"><button id="undo">↶ 戻す</button><button id="redo">↷ やり直す</button><span id="historySummary" class="muted">履歴 0 / 0</span><button id="png">画像保存</button><button id="save" class="primary">JSON保存</button><button id="record">動画保存</button></div><div id="notice" class="alert" role="status" aria-live="polite" style="margin-top:12px">右側の「マップ画像を選択」から画像を読み込めます。作戦デモも利用できます。</div>
+</div></div>
+<aside>
+<section class="card map-source-card" aria-label="マップと作戦データの設定">
+ <div class="section-kicker"><span class="kicker-bar"></span> MAP SETUP <span class="step-tag">01</span></div>
+ <h2>マップを準備</h2>
+ <p class="source-hint">ゲーム画面のスクリーンショットを読み込み、作戦図の背景にできます。</p>
+ <button id="chooseImage" type="button" class="source-upload"><span class="upload-icon" aria-hidden="true">▧</span><span><b>マップ画像を選択</b><small>クリックして画像を読み込む</small></span><span class="upload-chevron" aria-hidden="true">↗</span></button>
+ <div class="source-settings"><label for="battlefield">戦場の種類</label><select id="battlefield"><option value="fort">砦戦</option><option value="castle">城戦</option></select></div>
+ <div class="source-shortcuts"><button id="newBlank" type="button">＋ 白紙で開始</button><button id="demo" type="button">▷ 動作デモ</button><button id="loadTop" type="button">↥ 作戦JSONを開く</button></div>
+</section>
+
+<div class="card"><div class="sideline"><h2>1. 部隊の管理</h2><span class="counter" id="counter">味方 0 / 敵 0</span></div><div class="row" style="margin-bottom:9px"><button id="addFriendly" class="primary stretch">＋ 味方部隊</button><button id="addEnemy" class="stretch">＋ 敵部隊</button></div><div class="row"><button id="showAll" class="small">全表示</button><button id="hideAll" class="small">全非表示</button><button id="solo" class="small">選択中のみ</button></div><div class="row" style="margin:8px 0"><label class="togglelabel"><input id="filterFriendly" type="checkbox" checked>味方を一覧表示</label><label class="togglelabel"><input id="filterEnemy" type="checkbox" checked>敵を一覧表示</label></div><div class="list" id="unitList" aria-label="部隊一覧"></div><p class="info">部隊一覧の左端のチェックは複数選択、隣のチェックはマップでの表示です。</p><div class="info" style="margin-top:7px">味方・敵を追加すると初期位置の指定が始まります。会議中は「✋ 駒を動かす」で仮配置のみ変更できます。各行の 🗑 で部隊を削除できます。地図上では「🗑 アイコン削除」→アイコンをタップ。非表示の部隊は削除対象になりません。</div></div>
+<div class="card special-card" id="specialPanel">
+  <div class="sideline"><h2>2. 特殊アイコンの管理</h2><span class="counter" id="specialCount">0 / 40</span></div>
+  <p class="muted" style="margin-top:0">味方・敵の部隊数とは別枠。総大将・強敵・井闌車を個別に管理します。</p>
+  <div class="row special-add-row"><button class="small" id="addBoss" type="button">◆ 総大将</button><button class="small" id="addStrong" type="button">◇ 強敵</button><button class="small" id="addSiege" type="button">▣ 井闌車</button></div>
+  <div class="row" style="margin:9px 0"><button class="small" id="showSpecial" type="button">特殊を全表示</button><button class="small" id="hideSpecial" type="button">特殊を全非表示</button></div>
+  <div id="specialList" class="list" aria-label="特殊アイコン一覧"></div>
+  <p class="info">☑ 複数選択・表示切替・名称・色・初期位置・仮移動・進軍線・途中待機・削除に対応。</p>
+</div>
+<div class="card"><h2>3. 選択中の駒</h2><div id="noUnit" class="muted">駒を追加または選択してください。</div><div hidden="" id="unitEditor"><div class="field" id="specialTypeRow" hidden style="margin-bottom:9px"><label for="specialType">特殊アイコンの種類</label><select id="specialType"><option value="boss">◆ 敵総大将</option><option value="strong">◇ 強敵</option><option value="siege">▣ 井闌車</option></select></div><div class="grid2"><div class="field"><label for="unitName">部隊名</label><input id="unitName" maxlength="18"></div><div class="field"><label for="unitColor">識別色</label><input id="unitColor" type="color" style="width:100%;height:37px;padding:3px"></div></div><div class="row" style="margin-top:9px"><button id="setOrigin" class="primary small">📍 初期位置を地図で指定</button><span class="info" id="originInfo"></span></div><div class="row" style="margin-top:9px"><button id="addBranch" class="small">＋ 分岐ルート</button><button id="deleteBranch" class="small danger">ルート削除</button><button id="deleteUnit" class="small danger">駒削除</button></div><div class="tabs" id="branches"></div><div class="grid2"><div class="field"><label for="departure">出発待ち（秒）</label><input id="departure" type="number" min="0" max="3600" step="1"></div><div class="field"><label for="travel">進軍時間（秒）</label><input id="travel" type="number" min="1" max="3600" step="1"></div><div class="field"><label for="people">参加人数</label><input id="people" type="number" min="0" max="999" placeholder="未指定"></div><div class="field"><label for="action">到着後</label><select id="action"><option value="attack">攻撃</option><option value="defend">防衛</option><option value="stay">待機</option></select></div></div><p class="muted" id="pathInfo" style="margin:9px 0 0"></p></div></div>
+<div class="card"><h2>4. 待機の設定 <span class="badge">操作改善</span></h2><div id="noWaitUnit" class="muted">駒を選択すると待機を設定できます。</div><div id="waitEditor" hidden><div class="row" style="margin-bottom:9px"><button id="addWaitMid" class="primary">＋ 中間に待機</button><button id="placeWait" class="small">地図で位置指定</button></div><div class="info" style="margin-bottom:8px">「地図で位置指定」→ ルート上をタップ。金色の⏸をドラッグして微調整できます。待機は何箇所でも追加可能です。</div><div id="waitList" class="stack"></div><div id="waitDetail" hidden><div class="separator"></div><div class="sideline"><span class="label" id="waitTitle">選択した待機</span><button id="deleteWait" class="small danger">待機削除</button></div><label for="waitSeconds" style="display:block;margin-top:8px">待機時間（秒）</label><div class="row"><input id="waitSeconds" type="number" min="0" max="3600" step="1" style="width:95px"><span class="muted">すぐ変更できます</span></div><div class="row" id="waitPresets" style="margin-top:8px"><button class="chip" data-seconds="5">5秒</button><button class="chip" data-seconds="10">10秒</button><button class="chip" data-seconds="20">20秒</button><button class="chip" data-seconds="30">30秒</button></div><label for="waitPosition" style="display:block;margin-top:8px">待機位置　<span id="waitPositionLabel">50%</span></label><input id="waitPosition" type="range" min="0" max="100" step="1"><div class="row"><button id="waitStart" class="small">出発地点</button><button id="waitCenter" class="small">中間地点</button><button id="waitEnd" class="small">到着地点</button></div></div></div></div>
+<div class="card"><h2>補助ツール</h2><div class="grid2"><div class="field"><label for="annotationText">配置する文字</label><input id="annotationText" maxlength="60" placeholder="例：集合・牽制"></div><div class="field"><label for="ink">書き込み色</label><input id="ink" type="color" value="#ffe16d" style="height:38px;width:100%;padding:3px"></div></div><div class="grid2" style="margin-top:8px"><div class="field"><label for="penWidth">線の太さ</label><select id="penWidth"><option value="4">細</option><option value="8" selected>標準</option><option value="14">太</option></select></div><div class="field"><label for="textSize">文字サイズ</label><select id="textSize"><option value="20">小</option><option value="28" selected>中</option><option value="40">大</option></select></div></div><div class="row" style="margin-top:8px"><button id="clearMarks" class="small">書き込み類を削除</button><button id="changeImage" class="small">背景画像変更</button></div><p class="info">「⌫ 手書き消しゴム」は手書き線のみを1ストローク単位で消します。「🗑 駒削除」は駒などを削除します。誤操作は「一つ戻す」で復元できます。</p></div>
+<div class="card" id="eventPanel"><h2>5. 選択した駒の行動タイムライン <span class="badge">時間アクション</span></h2>
+ <p class="info">時刻順に退場・再出現を管理します。会議用の仮配置と再生時の退場は別です。</p>
+ <div id="eventNoUnit" class="muted">駒を選択してください。</div>
+ <div id="eventEditor" hidden>
+  <div class="row"><button type="button" id="eventAddExit" class="small">👻 現在時刻に退場</button><button type="button" id="eventAddSpawn" class="small">✨ 再出現地点を指定</button></div>
+  <div id="eventList" style="margin-top:9px"></div>
+ </div>
+</div>
+<div class="card"><h2>保存と共有</h2><div class="row"><button id="saveAgain" class="primary">JSONで作戦保存</button><button id="loadAgain">JSONを開く</button></div><label class="togglelabel" style="margin:10px 0"><input id="showPaths" type="checkbox" checked>再生時も進軍ルートを表示</label><div class="muted">旧作戦の読込可／自動保存はこのブラウザ内のみ。定期的にJSONでも保存してください。</div><div class="separator"></div><div class="field"><label for="audio">動画書き出し用音声（任意）</label><input type="file" id="audio" accept="audio/*"></div><button id="clearAudio" class="small" style="margin-top:7px">音声を外す</button><p class="muted">音声ファイルは作戦JSONには入りません。</p></div>
+</aside>
+</div>
+<footer class="app-footer"><span class="footer-copy">作戦データはブラウザ内に自動保存されます。大切な作戦はJSONでも保存してください。</span><span class="app-version">チュール式戦術ボード · v0.7.2</span></footer>
+<div id="waitContextMenu" class="wait-context" hidden role="dialog" aria-label="駒の待機設定">
+  <div class="wc-head"><strong id="wcTitle">駒の待機設定</strong><button id="wcClose" type="button" class="small" aria-label="待機設定を閉じる">✕ 閉じる</button></div>
+  <div class="wc-section">
+    <strong>👻 退場・✨ 再出現</strong>
+    <div class="wc-note">指定時刻に非表示／再出現します。完全削除ではありません。</div>
+    <label for="wcEventTime">実行時刻（秒）</label><input id="wcEventTime" type="number" min="0" max="3600" step="0.5" value="0">
+    <label class="togglelabel" id="wcBatchRow" style="margin:8px 0"><input id="wcBatch" type="checkbox"> 選択中の駒にもまとめて適用</label>
+    <div class="wc-action-buttons"><button id="wcExit" type="button" class="wc-danger">👻 指定時刻に退場</button><button id="wcSpawn" type="button" class="wc-primary">✨ 地図をクリックして再出現</button></div>
+    <div class="wc-row"><button id="wcSpawnRoute" type="button">✎ 再出現後の進軍線を描く</button><button id="wcShowTimeline" type="button">📋 行動履歴</button></div>
+  </div>
+  <div class="wc-section"><div class="wc-note">作戦会議中の状態表示（進軍再生の秒数とは別です）</div><button id="wcMeetingPause" type="button" class="w100">⏸ この駒を待機にする</button></div>
+  <div class="wc-section"><label for="wcDelay">出発前の待機時間（秒）</label><input id="wcDelay" type="number" min="0" max="3600" step="1" inputmode="numeric"><div class="wc-row"><button id="wcSaveDelay" class="primary" type="button">出発待ち時間を設定</button></div></div>
+  <div class="wc-section"><strong>進軍途中の待機</strong><div id="wcNoRoute" class="wc-note" hidden>進軍ルートが未設定です。先に進軍線を描くと途中待機を追加できます。</div>
+    <div id="wcRouteControls"><label for="wcBranch">対象のルート</label><select id="wcBranch"></select><label for="wcExisting">追加／既存の待機を編集</label><select id="wcExisting"></select>
+      <label for="wcSeconds">待機時間（秒）</label><input id="wcSeconds" type="number" min="0" max="3600" step="1" inputmode="numeric" value="10">
+      <div class="wc-presets" id="wcPresets"><button type="button" data-wc-sec="5">5秒</button><button type="button" data-wc-sec="10">10秒</button><button type="button" data-wc-sec="20">20秒</button><button type="button" data-wc-sec="30">30秒</button></div>
+      <div class="wc-note" id="wcLocation">この駒の位置に近い進軍ルート上へ追加します。</div>
+      <div class="wc-row"><button id="wcSaveWait" type="button" class="wc-primary">＋ ここに待機を追加</button><button id="wcDeleteWait" type="button" class="wc-danger" hidden>待機を削除</button></div>
+    </div>
+  </div>
+</div>
+<input id="imageFile" type="file" accept="image/*" hidden><input id="jsonFile" type="file" accept=".json,application/json" hidden>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),canvas=$('map'),ctx=canvas.getContext('2d');
+const MAX_PER_SIDE=30,MAX_SPECIAL=40,SPECIAL_TYPES={boss:{label:'敵総大将',color:'#b92d43',symbol:'将'},strong:{label:'強敵',color:'#ac792f',symbol:'強'},siege:{label:'井闌車',color:'#237ea9',symbol:'車'}}, FRIEND_COLORS=['#58aaff','#32d9ca','#8aafff','#72d69a','#d1a2ff','#f1c55e'],ENEMY_COLORS=['#ff7777','#ffae71','#f06caa','#ffb45f','#da8bff','#f16b6b'];
+const KEY='shirasu-tactical-v12',AUTOSAVE_DB='shirasu-tactical-v12-db',MAX_PLANS=16,MAX_EVENTS=40;
+let board={version:12,title:'',battlefield:'fort',units:[],notes:[],rings:[],enemies:[],freeLines:[],warehouses:[],targets:[]};
+let laser={p:null,pulsePoint:null,pulseUntil:0};
+let background=null,backgroundSrc='',nextId=1,unitId=null,branchIdx=0,waitId=null,tool='move',mode='meeting',focused=false,zoom=1,panX=0,panY=0,viewNames=true,viewStates=false,viewNumbers=false,viewRoutes=false,viewFriend=true,viewEnemy=true,viewSpecial=true,progress=0,playing=false,recording=false,playOrigin=0,history=[],redoHistory=[],plans=[],activePlanId=null,planSeq=1,planHistories={},selectedIds=new Set(),multiMode=false,autosaveReady=false,autosaveTimer=null,autosaveRevision=0,autosaveStatusTimer=null,actionPlacement=null,spawnRouteEdit=null,showGhosts=false,outRosterOpen=false,draft=null,gesture=null,selectedWarehouse=-1,audioURL=null,showPaths=true;
+const deep=o=>JSON.parse(JSON.stringify(o)),clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),num=(v,d=0)=>Number.isFinite(+v)?+v:d;
+const pt=p=>Array.isArray(p)&&p.length===2&&p.every(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0&&v<=1);
+const newBranch=()=>({path:[],delay:0,travel:12,people:null,action:'attack',waits:[]});
+const activeUnit=()=>board.units.find(u=>u.id===unitId),activeBranch=()=>activeUnit()?.branches[branchIdx];
+function specialName(kind){return SPECIAL_TYPES[kind]?.label||'特殊'}
+function sideName(u){return u.side==='friend'?'味方':u.side==='enemy'?'敵':specialName(u.kind)}
+function visibleOnMap(u){return u.visible&&(u.side==='friend'?viewFriend:u.side==='enemy'?viewEnemy:viewSpecial)}
+function newUnit(side,kind=null){const count=board.units.filter(u=>u.side===side).length;const cap=side==='special'?MAX_SPECIAL:MAX_PER_SIDE;if(count>=cap){msg('この分類の上限 '+cap+' 個に達しました。');return null}if(side==='special'&&!SPECIAL_TYPES[kind])return null;
+const sameKind=side==='special'?board.units.filter(u=>u.side==='special'&&u.kind===kind).length:0;
+const p=side==='friend'?[.22,.35+(count%5)*.12]:side==='enemy'?[.78,.35+(count%5)*.12]:[.5+(count%5)*.055,.32+(Math.floor(count/5)%5)*.105];
+const u={id:'u'+(nextId++),side,kind:side==='special'?kind:undefined,name:side==='friend'?String.fromCharCode(65+count%26)+(count>=26?count-25:''):side==='enemy'?'敵'+(count+1):specialName(kind)+(sameKind+1),color:side==='special'?SPECIAL_TYPES[kind].color:(side==='friend'?FRIEND_COLORS:ENEMY_COLORS)[count%6],visible:true,origin:p,live:[...p],paused:false,events:[],branches:[newBranch()]};board.units.push(u);return u} 
+function moveOrigin(u,p){
+ // Keep the visible starting point and every branch's departure point synchronized.
+ u.origin=[...p];u.live=[...p];
+ for(const b of u.branches)if(b.path.length)b.path[0]=[...p];
+}
+function stop(){playing=false}function msg(m){$('notice').textContent=m}
+function recordHistory(){history.push(deep(board));if(history.length>75)history.shift();redoHistory.length=0;refreshHistoryButtons();scheduleAutosave()}
+function snap(){recordHistory()}
+function refreshHistoryButtons(){$('undo').disabled=!history.length;$('redo').disabled=!redoHistory.length;$('historySummary').textContent='履歴：戻す '+history.length+' / やり直す '+redoHistory.length}
+function sanitiseSelection(){selectedIds=new Set([...selectedIds].filter(id=>board.units.some(u=>u.id===id)));if(unitId!==null&&!board.units.some(u=>u.id===unitId))unitId=board.units[0]?.id||null;}
+function chooseUnits(ids,add=false){const valid=ids.filter(id=>board.units.some(u=>u.id===id));if(!add)selectedIds.clear();for(const id of valid){if(add&&selectedIds.has(id)){selectedIds.delete(id)}else selectedIds.add(id)}if(valid.length)unitId=selectedIds.has(valid.at(-1))?valid.at(-1):([ ...selectedIds][0]||null);if(!selectedIds.size&&valid.length===0)unitId=null;sanitiseSelection();redrawUI()}
+function selectedUnits(){return board.units.filter(u=>selectedIds.has(u.id))}
+function refreshSelectionUI(){sanitiseSelection();$('selectedCount').textContent=selectedIds.size+'部隊選択';$('multiMode').classList.toggle('active',multiMode);$('multiMode').setAttribute('aria-pressed',String(multiMode));$('multiMode').textContent='☑ 複数選択：'+(multiMode?'ON':'OFF')}
+
+// v0.5: workspaces; board and histories are isolated per plan.
+function nextPlanId(){let id;do{id='plan'+planSeq++}while(plans.some(p=>p.id===id));return id}
+function capturePlan(){const p=plans.find(p=>p.id===activePlanId);if(p)p.board=deep(board);if(activePlanId)planHistories[activePlanId]={undo:history,redo:redoHistory}}
+function workspaceData(withHistories=false){capturePlan();const data={format:'shirasu-tactical-board',version:12,backgroundSrc,rate:num($('rate').value,1),activePlanId,plans:plans.map(p=>({id:p.id,name:p.name,board:p.board}))};if(withHistories)data.histories=Object.fromEntries(Object.entries(planHistories).map(([id,h])=>[id,{undo:h.undo.slice(-20),redo:h.redo.slice(-20)}]));return data}
+function updatePlanUI(){const picker=$('planPicker');picker.replaceChildren();for(const p of plans){const opt=document.createElement('option');opt.value=p.id;opt.textContent=p.name;picker.append(opt)}picker.value=activePlanId||'';$('planDuplicate').disabled=plans.length>=MAX_PLANS;$('planNew').disabled=plans.length>=MAX_PLANS;$('planDelete').disabled=plans.length<=1}
+function refreshNextId(){nextId=1;for(const u of board.units)for(const value of [u.id,...u.branches.flatMap(b=>b.waits.map(w=>w.id)),...(u.events||[]).flatMap(e=>[e.id,...(e.waits||[]).map(w=>w.id)])]){const n=+String(value).replace(/\D/g,'');if(Number.isFinite(n))nextId=Math.max(nextId,n+1)}}
+function activatePlan(id,saveBefore=true){actionPlacement=null;spawnRouteEdit=null;$('pendingHelp').hidden=true;const p=plans.find(v=>v.id===id);if(!p)return;hideWaitContext();if(saveBefore)capturePlan();stop();activePlanId=id;board=deep(p.board);const log=planHistories[id]||{undo:[],redo:[]};history=log.undo||[];redoHistory=log.redo||[];unitId=board.units[0]?.id||null;selectedIds=new Set(unitId?[unitId]:[]);branchIdx=0;waitId=null;progress=0;refreshNextId();updatePlanUI();redrawUI();scheduleAutosave();msg('「'+p.name+'」に切り替えました。配置・ルート・待機は案ごとに独立しています。')}
+function initPlans(){plans=[{id:'plan1',name:'作戦案 A',board:deep(board)}];activePlanId='plan1';planSeq=2;planHistories={plan1:{undo:history,redo:redoHistory}};updatePlanUI()}
+$('planPicker').onchange=()=>activatePlan($('planPicker').value);
+$('planDuplicate').onclick=()=>{if(plans.length>=MAX_PLANS)return;capturePlan();const src=plans.find(p=>p.id===activePlanId),id=nextPlanId(),name=(src?.name||'作戦案').slice(0,32)+'（コピー）';plans.push({id,name,board:deep(board)});planHistories[id]={undo:[],redo:[]};activatePlan(id,false)};
+$('planNew').onclick=()=>{if(plans.length>=MAX_PLANS)return;capturePlan();resetBoard(false);board.units=[];unitId=null;selectedIds.clear();const id=nextPlanId(),name='作戦案 '+(plans.length+1);plans.push({id,name,board:deep(board)});planHistories[id]={undo:[],redo:[]};activePlanId=id;updatePlanUI();redrawUI();scheduleAutosave();msg('白紙の作戦案を追加しました。背景画像は全案で共通です。')};
+$('planRename').onclick=()=>{const p=plans.find(p=>p.id===activePlanId);if(!p)return;const answer=prompt('作戦案の新しい名前（40文字以内）',p.name);if(answer===null)return;const name=answer.trim().slice(0,40);if(!name){msg('名前を入力してください。');return}p.name=name;updatePlanUI();scheduleAutosave();msg('作戦案の名前を変更しました。')};
+$('planDelete').onclick=()=>{if(plans.length<=1)return;const p=plans.find(p=>p.id===activePlanId);if(!confirm('「'+p.name+'」を削除しますか？この削除は取り消せません。'))return;plans=plans.filter(x=>x.id!==activePlanId);delete planHistories[activePlanId];activatePlan(plans[0].id,false)};
+// IndexedDB (map photos can be large); localStorage fallback where IndexedDB is blocked.
+const storageTimestamp=()=>new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+function autosaveStatus(text){$('autosaveStatus').textContent=text}
+function openAutosaveDB(){return new Promise((resolve,reject)=>{if(!('indexedDB'in window))return reject(Error('IndexedDB利用不可'));const req=indexedDB.open(AUTOSAVE_DB,1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('store'))req.result.createObjectStore('store')};req.onerror=()=>reject(req.error||Error('IndexedDB接続失敗'));req.onsuccess=()=>resolve(req.result)})}
+async function idbPut(data){const db=await openAutosaveDB();try{await new Promise((resolve,reject)=>{const tx=db.transaction('store','readwrite');tx.objectStore('store').put(data,'latest');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error||Error('自動保存失敗'));tx.onabort=()=>reject(tx.error||Error('自動保存中断'))})}finally{db.close()}}
+async function idbGet(){const db=await openAutosaveDB();try{return await new Promise((resolve,reject)=>{const tx=db.transaction('store','readonly'),req=tx.objectStore('store').get('latest');req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error||Error('復元失敗'))})}finally{db.close()}}
+async function previousAutosave(version){
+ let result=null;try{const db=await new Promise((resolve,reject)=>{const r=indexedDB.open('shirasu-tactical-v'+version+'-db');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});
+ try{if(db.objectStoreNames.contains('store'))result=await new Promise((resolve,reject)=>{const r=db.transaction('store','readonly').objectStore('store').get('latest');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}finally{db.close()}}catch(e){}
+ if(result)return result;
+ try{return JSON.parse(localStorage.getItem('shirasu-tactical-v'+version)||'null')}catch(e){return null}
+}
+async function storedWorkspace(){let result=null;try{result=await idbGet()}catch(e){}if(result)return result;
+ try{result=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(result)return result;
+ for(const version of [11,10]){result=await previousAutosave(version);if(result)return result}
+ return null}
+let saveLoop=null;
+async function flushAutosave(){if(!autosaveReady||!plans.length)return false;clearTimeout(autosaveTimer);autosaveTimer=null;autosaveRevision++;if(saveLoop)return saveLoop;saveLoop=(async()=>{let success=true,savedRev=-1;while(savedRev!==autosaveRevision){const rev=autosaveRevision,data=workspaceData(true);try{await idbPut(data);autosaveStatus('✓ 自動保存 '+storageTimestamp());success=true}catch(err){try{localStorage.setItem(KEY,JSON.stringify(data));autosaveStatus('✓ 自動保存 '+storageTimestamp()+'（簡易保存）');success=true}catch(e){autosaveStatus('⚠ 自動保存できません。JSON保存してください');success=false}}savedRev=rev}return success})();try{return await saveLoop}finally{saveLoop=null}}
+function scheduleAutosave(){if(!autosaveReady||!plans.length)return;autosaveStatus('● 保存待ち…');clearTimeout(autosaveTimer);autosaveTimer=setTimeout(()=>{flushAutosave()},850)}
+async function importWorkspace(data){let imported,src='',rate=1,activeId=null;
+ if(data?.format==='shirasu-tactical-board'&&[10,11,12].includes(data.version)){if(!Array.isArray(data.plans)||!data.plans.length||data.plans.length>MAX_PLANS)throw Error('作戦案の数が不正です');const ids=new Set();imported=data.plans.map(p=>{if(!p||typeof p.id!=='string'||!/^plan\d+$/.test(p.id)||ids.has(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>40)throw Error('作戦案のデータが不正です');ids.add(p.id);return {id:p.id,name:p.name,board:cleanBoard(deep(p.board))}});activeId=ids.has(data.activePlanId)?data.activePlanId:imported[0].id;src=data.backgroundSrc||'';rate=num(data.rate,1)}
+ else if(data?.format==='shirasu-tactical-board'&&[8,9].includes(data.version)){imported=[{id:'plan1',name:'作戦案 A',board:cleanBoard(deep(data.board))}];activeId='plan1';src=data.backgroundSrc||'';rate=num(data.rate,1)}
+ else{const value=cleanBoard(loadLegacy(data));src=value._src||'';delete value._src;imported=[{id:'plan1',name:'旧しらす式から取込',board:value}];activeId='plan1'}
+ if(typeof src!=='string'||(src&&!src.startsWith('data:image/')&&src!=='map.jpg'))throw Error('背景画像データが不正です');if(src.length>50*1024*1024)throw Error('背景画像が大きすぎます');const imageSrc=src==='map.jpg'?'':src;
+ if(imageSrc){const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(Error('背景画像が壊れています'));img.src=imageSrc})}
+ stop();await setBackground(imageSrc);plans=imported;activePlanId=activeId;planSeq=Math.max(1,...plans.map(p=>Number(p.id.slice(4))+1));planHistories={};for(const p of plans)planHistories[p.id]={undo:[],redo:[]};
+ // Recover recent undo/redo states if present in an autosave (not required for exported JSON).
+ if([10,11,12].includes(data.version)&&data.histories&&typeof data.histories==='object')for(const p of plans){const h=data.histories[p.id];if(!h)continue;try{const undo=Array.isArray(h.undo)?h.undo.slice(-30).map(x=>cleanBoard(deep(x))):[];const redo=Array.isArray(h.redo)?h.redo.slice(-30).map(x=>cleanBoard(deep(x))):[];planHistories[p.id]={undo,redo}}catch(e){/* corrupt history is discarded, plan remains valid */}}
+ const active=plans.find(p=>p.id===activePlanId);board=deep(active.board);history=planHistories[activePlanId].undo;redoHistory=planHistories[activePlanId].redo;unitId=board.units[0]?.id||null;selectedIds=new Set(unitId?[unitId]:[]);branchIdx=0;waitId=null;progress=0;$('rate').value=String([.5,1,2,4,8].includes(rate)?rate:1);refreshNextId();updatePlanUI();redrawUI();scheduleAutosave()}
+$('restoreAutosave').onclick=async()=>{const data=await storedWorkspace();if(!data){msg('復元できる自動保存データがありません。');return}if(!confirm('ブラウザに保存された作業で現在の内容を置き換えますか？'))return;try{await importWorkspace(data);msg('自動保存から'+plans.length+'案を復元しました。')}catch(e){msg('復元に失敗しました：'+e.message)}};
+async function offerRestore(){const data=await storedWorkspace();if(data){autosaveStatus('前回の自動保存あり');if(confirm('前回の自動保存があります。作戦案と仮配置を復元しますか？')){try{await importWorkspace(data);msg('前回の作業を復元しました。')}catch(e){msg('自動保存の復元に失敗しました：'+e.message)}}else autosaveStatus('復元せず開始（変更後から自動保存）')}else autosaveStatus('自動保存が有効です');autosaveReady=true}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&autosaveTimer)flushAutosave()});window.addEventListener('pagehide',()=>{if(autosaveTimer)flushAutosave()});
+
+function hideHitPicker(){const p=$('hitPicker');p.hidden=true;p.replaceChildren()}
+function unitSelect(id,branch=0,add=false){if(!board.units.some(u=>u.id===id))return;hideHitPicker();if(add){if(selectedIds.has(id))selectedIds.delete(id);else selectedIds.add(id)}else selectedIds=new Set([id]);unitId=selectedIds.has(id)?id:(selectedIds.values().next().value||null);branchIdx=branch;waitId=null;syncUI();timelineUI();render();}
+
+function deleteUnitById(id){const u=board.units.find(x=>x.id===id);if(!u)return false;
+  hideHitPicker();stop();if(!confirm(sideName(u)+'「'+u.name+'」を削除しますか？\n進軍ルートと待機設定も削除されます。（「一つ戻す」で復元できます）'))return false;
+  snap();board.units=board.units.filter(x=>x.id!==id);selectedIds.delete(id);if(unitId===id){unitId=board.units[0]?.id||null;branchIdx=0;waitId=null}sanitiseSelection()
+  redrawUI();msg(sideName(u)+'「'+u.name+'」を削除しました。「↶ 一つ戻す」で復元できます。');return true;
+}
+function resetBoard(blank=true){hideWaitContext();actionPlacement=null;spawnRouteEdit=null;$('pendingHelp').hidden=true;stop();board={version:11,title:'',battlefield:'fort',units:[],notes:[],rings:[],enemies:[],freeLines:[],warehouses:[],targets:[]};history=[];redoHistory=[];selectedIds.clear();nextId=1;const a=newUnit('friend'),b=newUnit('friend'),c=newUnit('enemy');unitId=a.id;selectedIds.add(a.id);branchIdx=0;waitId=null;progress=0;if(blank){background=null;backgroundSrc='';canvas.width=1200;canvas.height=800}syncUI();render();msg('準備できました。部隊を選び、地図上に進軍ルートを描いてください。')}
+function totalSeconds(){let max=Math.max(12,num(board.timelineEnd,12));for(const u of board.units){for(const b of u.branches){if(b.path.length>=2)max=Math.max(max,b.delay+b.travel+b.waits.reduce((n,w)=>n+w.seconds,0));else if(b.delay)max=Math.max(max,b.delay)}for(const e of u.events||[]){max=Math.max(max,e.time+1);if(e.type==='spawn'&&e.path?.length>=2)max=Math.max(max,e.time+e.delay+e.travel+(e.waits||[]).reduce((n,w)=>n+w.seconds,0))}}return Math.min(3600,max)}
+function routeState(b,time){if(!b.path.length)return {f:0,label:'未設定'};if(time<b.delay)return {f:0,label:'出発待ち'};
+ const waits=[...b.waits].filter(w=>w.seconds>0).sort((a,c)=>a.at-c.at);let waited=0;for(const w of waits){const begin=b.delay+w.at*b.travel+waited;if(time<begin){return {f:clamp((time-b.delay-waited)/b.travel),label:'進軍中'}}if(time<begin+w.seconds){return {f:w.at,label:'待機中'}}waited+=w.seconds}
+ const f=clamp((time-b.delay-waited)/b.travel);return {f,label:f>=1?(b.action==='defend'?'防衛中':b.action==='stay'?'待機中':'攻撃中'):'進軍中'};
+}
+function at(path,f){if(!path.length)return null;if(path.length===1)return path[0];const widths=[];let sum=0;for(let i=1;i<path.length;i++){let d=Math.hypot((path[i][0]-path[i-1][0])*canvas.width,(path[i][1]-path[i-1][1])*canvas.height);widths.push(d);sum+=d}let need=f*sum;for(let i=0;i<widths.length;i++){if(need<=widths[i]){let k=widths[i]?need/widths[i]:0;return [path[i][0]+(path[i+1][0]-path[i][0])*k,path[i][1]+(path[i+1][1]-path[i][1])*k]}need-=widths[i]}return path.at(-1)}
+function pathLength(path){let length=0;for(let i=1;i<path.length;i++)length+=Math.hypot((path[i][0]-path[i-1][0])*canvas.width,(path[i][1]-path[i-1][1])*canvas.height);return length}
+function keepWaitLocations(waits,oldPath,newPath){const oldLength=pathLength(oldPath),newLength=pathLength(newPath);if(oldLength>0&&newLength>0)for(const w of waits||[])w.at=clamp(w.at*oldLength/newLength)}
+function nearest(path,p){if(path.length<2)return {f:.5,dist:Infinity};let all=0,segments=[];for(let i=1;i<path.length;i++){const a=path[i-1],b=path[i],len=Math.hypot((b[0]-a[0])*canvas.width,(b[1]-a[1])*canvas.height);segments.push(len);all+=len}let done=0,best={f:0,dist:Infinity};for(let i=0;i<segments.length;i++){const a=path[i],b=path[i+1],dx=(b[0]-a[0])*canvas.width,dy=(b[1]-a[1])*canvas.height,x=(p[0]-a[0])*canvas.width,y=(p[1]-a[1])*canvas.height;const k=clamp((x*dx+y*dy)/(dx*dx+dy*dy||1)),dist=Math.hypot(x-k*dx,y-k*dy);if(dist<best.dist)best={f:all?(done+k*segments[i])/all:0,dist};done+=segments[i]}return best}
+function getPoint(e){const r=canvas.getBoundingClientRect();return [clamp((e.clientX-r.left)/r.width),clamp((e.clientY-r.top)/r.height)]}
+function colorText(str,x,y,size=18,color='#fff'){ctx.font='700 '+size+'px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';const width=ctx.measureText(str).width,x2=clamp(x,width/2+8,canvas.width-width/2-8),y2=clamp(y,14,canvas.height-15);ctx.fillStyle='#101925df';ctx.fillRect(x2-width/2-6,y2-size/2-5,width+12,size+10);ctx.fillStyle=color;ctx.fillText(str,x2,y2)}
+function grid(){const w=canvas.width,h=canvas.height;ctx.fillStyle='#17293a';ctx.fillRect(0,0,w,h);ctx.strokeStyle='#355066';ctx.lineWidth=1;for(let x=0;x<w;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}for(let y=0;y<h;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}ctx.fillStyle='#8ba1af';ctx.textAlign='center';ctx.font='24px system-ui';ctx.fillText('戦術ボード — 背景画像を選択できます',w/2,h/2)}
+function strokePath(path,color,width,dashed=false){if(!path||path.length<2)return;ctx.strokeStyle=color;ctx.lineWidth=width;ctx.setLineDash(dashed?[16,10]:[]);ctx.beginPath();path.forEach(([x,y],i)=>i?ctx.lineTo(x*canvas.width,y*canvas.height):ctx.moveTo(x*canvas.width,y*canvas.height));ctx.stroke();ctx.setLineDash([])}
+function unitMarker(p,u,label,state){const x=p[0]*canvas.width,y=p[1]*canvas.height,enemy=u.side==='enemy',special=u.side==='special';ctx.beginPath();ctx.lineWidth=4;ctx.strokeStyle='#f1f5fc';ctx.fillStyle=u.color;
+if(special&&u.kind==='siege'){ctx.fillRect(x-23,y-20,46,40);ctx.strokeRect(x-23,y-20,46,40);ctx.beginPath();ctx.arc(x-14,y+24,6,0,Math.PI*2);ctx.arc(x+14,y+24,6,0,Math.PI*2);ctx.fill();ctx.stroke()}
+else if(special){for(let i=0;i<8;i++){const a=(i-.5)*Math.PI/4,px=x+27*Math.cos(a),py=y+27*Math.sin(a);i?ctx.lineTo(px,py):ctx.moveTo(px,py)}ctx.closePath();ctx.fill();ctx.stroke()}
+else if(enemy){ctx.moveTo(x,y-22);ctx.lineTo(x+25,y);ctx.lineTo(x,y+22);ctx.lineTo(x-25,y);ctx.closePath();ctx.fill();ctx.stroke()}
+else{ctx.arc(x,y,22,0,2*Math.PI);ctx.fill();ctx.stroke()}
+ctx.fillStyle='#101c29';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 17px system-ui';ctx.fillText(special?SPECIAL_TYPES[u.kind]?.symbol||'特':label.slice(0,4),x,y);
+if(special&&viewNames)colorText(u.name,x,y-42,14,'#fff4dc');
+if(state){const badge=[state,special?specialName(u.kind):(enemy?'敵':'味方')].filter(Boolean).join(' · ');colorText(badge,x,y+38,15)}}
+// v0.7: appearance is a time-based event, independent of manual visible/hidden toggles.
+function sortedEvents(u){return [...(u.events||[])].sort((a,b)=>a.time-b.time||(a.type==='exit'?-1:1)-(b.type==='exit'?-1:1)||a.id.localeCompare(b.id))}
+function presenceAt(u,time,branch=0){let last=null;for(const event of sortedEvents(u)){if(event.time>time+1e-6)break;last=event}
+ if(!last)return {visible:true,position:null,phase:'original'};
+ if(last.type==='exit')return {visible:false,position:null,phase:'exit',event:last};
+ let position=last.point;const elapsed=Math.max(0,time-last.time);
+ if(last.path?.length>=2)position=at(last.path,routeState(last,elapsed).f);
+ return {visible:true,position,phase:'spawn',event:last};
+}
+function eventName(e){return e.type==='exit'?'👻 退場':'✨ 再出現'}
+function currentSeconds(){return +(progress*totalSeconds()).toFixed(1)}
+function setActionSeconds(value){const t=clamp(num(value),0,3600);stop();if(t>totalSeconds()){board.timelineEnd=Math.min(3600,Math.ceil(t));scheduleAutosave()}progress=clamp(t/totalSeconds());render()}
+function updateActionRail(){const t=currentSeconds(),max=totalSeconds();$('actionSeek').max=String(max);$('actionSeek').value=String(Math.min(t,max));if(document.activeElement!==$('actionTime'))$('actionTime').value=String(t);$('outCount').textContent=board.units.filter(u=>visibleOnMap(u)&&!presenceAt(u,t).visible).length; if(outRosterOpen&& !playing)renderOutRoster(t)}
+function renderOutRoster(time=currentSeconds()){
+ const list=$('outRoster');list.replaceChildren();const hidden=board.units.filter(u=>!presenceAt(u,time).visible);
+ if(!hidden.length){const info=document.createElement('span');info.textContent='この時刻に退場中の駒はありません。';info.className='muted';list.append(info);return}
+ for(const u of hidden){const row=document.createElement('div');row.className='outrow';const label=document.createElement('span');label.textContent='👻 '+sideName(u)+' '+u.name;
+ const edit=document.createElement('button');edit.textContent='📋 編集';edit.onclick=()=>{unitSelect(u.id,0);$('eventPanel').scrollIntoView({behavior:'smooth',block:'nearest'})};
+ const spawn=document.createElement('button');spawn.textContent='✨ 再出現';spawn.onclick=()=>beginSpawnPlacement([u.id],time);row.append(label,edit,spawn);list.append(row)}
+}
+function captureActionGroups(anchorId,useBatch){return useBatch&&selectedIds.has(anchorId)?selectedUnits().map(u=>u.id):[anchorId]}
+function newEvent(type,time,point=null){const result={id:'e'+(nextId++),type,time};if(type==='spawn'){result.point=[...point];result.path=[];result.travel=12;result.delay=0;result.waits=[];result.action='attack'}return result}
+function addEvents(ids,type,time,point=null,anchorId=ids[0]){
+ const uids=[...new Set(ids)].filter(id=>board.units.some(u=>u.id===id));
+ if(!uids.length)return false;
+ if(!Number.isFinite(time)||time<0||time>3600){msg('時刻は0～3600秒で設定してください。');return false}
+ if(uids.some(id=>board.units.find(u=>u.id===id).events.length>=MAX_EVENTS)){msg('1駒あたりの行動は最大'+MAX_EVENTS+'件です。');return false}
+ const reference=board.units.find(u=>u.id===anchorId)||board.units.find(u=>u.id===uids[0]);
+ snap();for(const id of uids){const u=board.units.find(u=>u.id===id);let atPoint=point;
+ if(type==='spawn'){const relative=u.live.map((n,i)=>n-reference.live[i]);atPoint=[clamp(point[0]+relative[0]),clamp(point[1]+relative[1])]}
+ u.events.push(newEvent(type,time,atPoint));}
+ board.timelineEnd=Math.max(num(board.timelineEnd,12),time+1);
+ redrawUI();scheduleAutosave();msg(uids.length+'駒に「'+(type==='exit'?'退場':'再出現')+'」を'+time+'秒で設定しました。');return true;
+}
+function clearActionPlacement(){actionPlacement=null;spawnRouteEdit=null;$('pendingHelp').hidden=true;draft=null;setTool('move');render()}
+function beginSpawnPlacement(ids,time=currentSeconds(),anchorId=ids[0]){
+ if(!ids?.length)return;
+ if(!Number.isFinite(time)||time<0||time>3600){msg('再出現時刻は0～3600秒で指定してください。');return}
+ hideWaitContext();stop();actionPlacement={ids:[...ids],time,anchorId};spawnRouteEdit=null;
+ $('pendingText').textContent='✨ '+time+'秒に再出現：マップ上の出現地点をクリック／タップしてください。複数駒は現在の隊列を維持します。';$('pendingHelp').hidden=false;setTool('move');msg('再出現させたい地点を地図上でクリックしてください。');
+}
+function beginSpawnRoute(u,id,extend=false){const event=u?.events?.find(e=>e.id===id&&e.type==='spawn');if(!event)return;
+ hideWaitContext();stop();unitId=u.id;selectedIds=new Set([u.id]);spawnRouteEdit={unitId:u.id,eventId:id,extend:extend&&event.path.length>=2};actionPlacement=null;
+ $('pendingText').textContent=(spawnRouteEdit.extend?'＋ 以前の線の終点から延長':'✎ 再出現地点から進軍')+'：マップ上で進軍先までドラッグ、または行き先をクリック／タップしてください。';$('pendingHelp').hidden=false;
+ setTool(spawnRouteEdit.extend?'extend':'route');render();msg('✨ '+u.name+'：再出現後の進軍線を地図に描いてください。');
+}
+function timelineUI(){const unit=activeUnit();$('eventNoUnit').hidden=!!unit;$('eventEditor').hidden=!unit;if(!unit)return;
+ const container=$('eventList');container.replaceChildren();const events=sortedEvents(unit);
+ if(!events.length){const note=document.createElement('p');note.className='muted';note.textContent='まだ退場・再出現の設定はありません。';container.append(note)}
+ for(const e of events){const card=document.createElement('div');card.className='eventitem';const head=document.createElement('div');head.className='event-title';const title=document.createElement('strong');title.textContent=eventName(e);const del=document.createElement('button');del.className='small danger';del.textContent='削除';del.onclick=()=>{snap();unit.events=unit.events.filter(x=>x.id!==e.id);redrawUI();msg(eventName(e)+'の命令を削除しました。')};head.append(title,del);
+ const row=document.createElement('div');row.className='row';const timeLabel=document.createElement('label');timeLabel.textContent='時刻';const input=document.createElement('input');input.type='number';input.min='0';input.max='3600';input.step='.5';input.value=e.time;input.setAttribute('aria-label',eventName(e)+' 時刻');input.onchange=()=>{const t=+input.value;if(!Number.isFinite(t)||t<0||t>3600){msg('時刻は0～3600秒で設定してください。');input.value=e.time;return}if(t!==e.time){snap();e.time=t;board.timelineEnd=Math.max(num(board.timelineEnd,12),t+1);redrawUI()}};const jump=document.createElement('button');jump.textContent='⏱ ここへ移動';jump.onclick=()=>{setMode('playback');setActionSeconds(e.time)};row.append(timeLabel,input,jump);card.append(head,row);
+ if(e.type==='spawn'){
+  const spawnRow=document.createElement('div');spawnRow.className='row';const locate=document.createElement('button');locate.textContent='📍 出現位置変更';locate.onclick=()=>{hideWaitContext();actionPlacement={ids:[unit.id],time:e.time,anchorId:unit.id,editId:e.id};$('pendingText').textContent='📍 '+unit.name+'の既存の再出現位置を地図上で指定してください';$('pendingHelp').hidden=false;setTool('move');msg('再出現位置をクリック／タップして変更してください')};const route=document.createElement('button');route.textContent=e.path.length>1?'✎ 進軍線を描き直す':'✎ 再出現後の進軍線';route.onclick=()=>beginSpawnRoute(unit,e.id);spawnRow.append(locate,route);if(e.path.length>=2){const extend=document.createElement('button');extend.textContent='＋ 進軍線を延長';extend.onclick=()=>beginSpawnRoute(unit,e.id,true);spawnRow.append(extend)}card.append(spawnRow);
+  const info=document.createElement('div');info.className='event-meta';info.textContent='出現位置 '+Math.round(e.point[0]*100)+'%, '+Math.round(e.point[1]*100)+'%'+(e.path.length>=2?' · 経路あり':' · 移動なし');card.append(info);
+  if(e.path.length>=2){const travelRow=document.createElement('div');travelRow.className='row';const l=document.createElement('label');l.textContent='出現後進軍（秒）';const sec=document.createElement('input');sec.type='number';sec.min='1';sec.max='3600';sec.step='1';sec.value=e.travel;sec.onchange=()=>{const v=+sec.value;if(!Number.isInteger(v)||v<1||v>3600){sec.value=e.travel;return}if(v!==e.travel){snap();e.travel=v;redrawUI()}};const waitLabel=document.createElement('label');waitLabel.textContent='出現後の待機（秒）';const delay=document.createElement('input');delay.type='number';delay.min='0';delay.max='3600';delay.value=e.delay;delay.onchange=()=>{const v=+delay.value;if(!Number.isInteger(v)||v<0||v>3600){delay.value=e.delay;return}if(v!==e.delay){snap();e.delay=v;redrawUI()}};const clear=document.createElement('button');clear.textContent='進軍線を消す';clear.className='danger';clear.onclick=()=>{snap();e.path=[];redrawUI()};travelRow.append(l,sec,waitLabel,delay,clear);card.append(travelRow)}
+ }
+ container.append(card)}
+}
+function draw(){const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);if(background?.complete&&background.naturalWidth)ctx.drawImage(background,0,0,w,h);else grid();ctx.lineJoin='round';ctx.lineCap='round';const t=totalSeconds()*progress;
+ for(const u of board.units){if(!visibleOnMap(u))continue;
+  const presence=mode==='playback'?presenceAt(u,t):null;
+  if(presence&&!presence.visible&&!showGhosts)continue;
+  const selected=unitId===u.id,showRoute=mode==='playback'?showPaths:viewRoutes||['route','extend','wait'].includes(tool);
+  if(mode==='meeting'){
+   if(showRoute)u.branches.forEach((b,i)=>{const chosen=selected&&i===branchIdx;const p=draft?.kind==='route'&&chosen?draft.points:b.path;if(p.length>=2){strokePath(p,u.color,chosen?7:3,!chosen);if(tool==='wait'||viewRoutes){for(const v of b.waits){const loc=at(p,v.at);if(loc){ctx.fillStyle='#172836';ctx.strokeStyle='#ffd276';ctx.lineWidth=3;ctx.beginPath();ctx.arc(loc[0]*w,loc[1]*h,14,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#ffe4a0';ctx.font='bold 16px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Ⅱ',loc[0]*w,loc[1]*h)}}}}});
+   if((showRoute||spawnRouteEdit?.unitId===u.id)&&selected)for(const event of u.events||[]){if(event.type==='spawn'&&event.path?.length>=2)strokePath(event.path,u.color,4,true)}
+   unitMarker(u.live||u.origin,u,viewNames?u.name:'',u.paused?'⏸ 待機':(viewStates?'移動可':null));
+   if(selectedIds.has(u.id)){const loc=u.live||u.origin;ctx.strokeStyle=u.id===unitId?'#fff0a3':'#82f6ff';ctx.lineWidth=4;ctx.beginPath();ctx.arc(loc[0]*w,loc[1]*h,32,0,2*Math.PI);ctx.stroke()}
+   if(viewNumbers&&u.branches[0].people!==null)colorText(u.branches[0].people+'人',(u.live||u.origin)[0]*w,(u.live||u.origin)[1]*h+63,14);
+  }else{
+   if(presence&&!presence.visible){ctx.save();ctx.globalAlpha=.23;unitMarker(u.origin,u,viewNames?u.name:'','👻 退場中');ctx.restore();continue;}
+   if(presence?.phase==='spawn'){
+     const ev=presence.event;
+     if(showRoute&&ev.path.length>=2)strokePath(ev.path,u.color,7,true);
+     unitMarker(presence.position,u,viewNames?u.name:'',viewStates?(ev.path.length>=2?routeState(ev,t-ev.time).label:'再出現') :null);
+     continue;
+   }
+   u.branches.forEach((b,index)=>{const chosen=selected&&index===branchIdx;const path=draft?.kind==='route'&&chosen?draft.points:b.path;if(path.length<2){if(index===0)unitMarker(u.origin,u,viewNames?u.name:'',viewStates?'配置':null);return}if(showRoute){strokePath(path,u.color,chosen?8:5,!chosen);const end=path.at(-1),prior=path.at(-2),ang=Math.atan2((end[1]-prior[1])*h,(end[0]-prior[0])*w);ctx.strokeStyle=u.color;ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(end[0]*w-21*Math.cos(ang-.55),end[1]*h-21*Math.sin(ang-.55));ctx.lineTo(end[0]*w,end[1]*h);ctx.lineTo(end[0]*w-21*Math.cos(ang+.55),end[1]*h-21*Math.sin(ang+.55));ctx.stroke()}
+   const state=routeState(b,t),pos=at(path,state.f);if(showRoute||tool==='wait')for(const wait of b.waits){const p=at(path,wait.at),xx=p[0]*w,yy=p[1]*h;ctx.lineWidth=3;ctx.strokeStyle=wait.id===waitId&&chosen?'#fff':'#ffc857';ctx.fillStyle='#132436';ctx.beginPath();ctx.arc(xx,yy,wait.id===waitId&&chosen?18:15,0,2*Math.PI);ctx.fill();ctx.stroke();ctx.fillStyle='#ffc857';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 16px system-ui';ctx.fillText('Ⅱ',xx,yy);if(chosen)colorText(wait.seconds+'秒',xx,yy-29,13,'#ffdc82')}
+   unitMarker(pos,u,viewNames?u.name+(u.branches.length>1?index+1:''):'',viewStates?state.label:null);if(viewNumbers&&b.people!==null)colorText(b.people+'人',pos[0]*w,pos[1]*h+63,14)})
+  }
+ }
+ if(tool==='place')for(const u of board.units){if(!visibleOnMap(u))continue;const x=u.origin[0]*w,y=u.origin[1]*h,chosen=u.id===unitId;ctx.beginPath();ctx.arc(x,y,chosen?32:28,0,Math.PI*2);ctx.setLineDash(chosen?[]:[6,5]);ctx.lineWidth=chosen?6:3;ctx.strokeStyle=chosen?'#fff3a5':'#ffffffb8';ctx.stroke();ctx.setLineDash([]);if(chosen)colorText('📍 初期位置（ルートの始点）',x,y-51,16,'#fff0aa')}
+ if(draft?.kind==='pen')strokePath(draft.points,draft.color,draft.width);if(['respawnRoute','extendRoute','extendRespawnRoute'].includes(draft?.kind))strokePath(draft.points,activeUnit()?.color||'#ffe6a4',8,true);
+ for(const line of board.freeLines)strokePath(line.points,line.color,line.width);
+ for(const ring of board.rings){const x=ring.p[0]*w,y=ring.p[1]*h;ctx.strokeStyle=ring.c;ctx.lineWidth=4;for(let r of [23,32]){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke()}}
+ for(const note of board.notes)colorText(note.t,note.p[0]*w,note.p[1]*h,note.size||25,note.c||'#fff');
+ if(tool==='pointer'&&laser.p){const px=laser.p[0]*w,py=laser.p[1]*h;ctx.beginPath();ctx.arc(px,py,17,0,Math.PI*2);ctx.lineWidth=4;ctx.strokeStyle='#ff515b';ctx.stroke();ctx.beginPath();ctx.arc(px,py,5,0,Math.PI*2);ctx.fillStyle='#ff6b73';ctx.fill()}
+ if(laser.pulsePoint&&performance.now()<laser.pulseUntil){const x=laser.pulsePoint[0]*w,y=laser.pulsePoint[1]*h,k=1-(laser.pulseUntil-performance.now())/750;ctx.save();ctx.globalAlpha=1-k;ctx.strokeStyle='#ff555e';ctx.lineWidth=5;ctx.beginPath();ctx.arc(x,y,20+45*k,0,Math.PI*2);ctx.stroke();ctx.restore()}
+
+ ctx.fillStyle='#10202ce8';ctx.fillRect(0,0,w,40);ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillStyle='#fff';ctx.font='700 17px system-ui';ctx.fillText((board.battlefield==='castle'?'城戦':'砦戦')+' ／ '+(board.title||'作戦図')+' ／ '+(mode==='meeting'?'作戦会議':t.toFixed(1)+'秒'),12,20);
+ $('seek').value=Math.round(progress*1000);$('clock').textContent=t.toFixed(1)+'秒';$('length').textContent='/ '+totalSeconds().toFixed(1)+'秒';updateActionRail();}
+function render(){draw();refreshHistoryButtons()}
+function redrawUI(){syncUI();timelineUI();render()}
+function syncUI(){hideHitPicker();refreshSelectionUI(); $('battlefield').value=board.battlefield;$('title').value=board.title;
+ const ff=board.units.filter(u=>u.side==='friend').length,ee=board.units.filter(u=>u.side==='enemy').length;$('counter').textContent='味方 '+ff+' / 敵 '+ee;$('addFriendly').disabled=ff>=MAX_PER_SIDE;$('addEnemy').disabled=$('quickAddEnemy').disabled=ee>=MAX_PER_SIDE;$('quickAddFriend').disabled=ff>=MAX_PER_SIDE;
+ const list=$('unitList'),specialList=$('specialList');list.replaceChildren();specialList.replaceChildren();
+const specialUnits=board.units.filter(u=>u.side==='special');$('specialCount').textContent=specialUnits.length+' / '+MAX_SPECIAL;
+for(const type of ['boss','strong','siege']){$('add'+(type==='boss'?'Boss':type==='strong'?'Strong':'Siege')).disabled=specialUnits.length>=MAX_SPECIAL;$('quickAdd'+(type==='boss'?'Boss':type==='strong'?'Strong':'Siege')).disabled=specialUnits.length>=MAX_SPECIAL}
+for(const u of board.units){if(u.side==='friend'&&!$('filterFriendly').checked||u.side==='enemy'&&!$('filterEnemy').checked)continue;const item=document.createElement('div');item.className='unitrow'+(selectedIds.has(u.id)?' selected':'')+(u.visible?'':' off');const multi=document.createElement('input');multi.type='checkbox';multi.className='multi';multi.checked=selectedIds.has(u.id);multi.title=u.name+'を一括操作の対象にする';multi.setAttribute('aria-label',u.name+'を複数選択');multi.onchange=()=>{if(multi.checked)selectedIds.add(u.id);else selectedIds.delete(u.id);if(multi.checked)unitId=u.id;else if(unitId===u.id)unitId=[...selectedIds][0]||null;sanitiseSelection();redrawUI()};const check=document.createElement('input');check.type='checkbox';check.checked=u.visible;check.title=u.name+'を表示／非表示';check.setAttribute('aria-label',u.name+'を表示');check.onchange=()=>{snap();u.visible=check.checked;redrawUI()};const b=document.createElement('button');const dot=document.createElement('span');dot.className='statusIcon';dot.style.background=u.color;b.append(dot,document.createTextNode(u.name+' '));const small=document.createElement('span');small.className='kind';small.textContent=sideName(u);b.append(small);b.onclick=e=>unitSelect(u.id,0,multiMode||e.shiftKey);const cnt=document.createElement('span');cnt.className='kind';cnt.textContent=u.branches.length+'経路';const del=document.createElement('button');del.type='button';del.className='unit-delete danger';del.textContent='🗑';del.title=sideName(u)+'「'+u.name+'」を削除';del.setAttribute('aria-label',del.title);del.onclick=()=>deleteUnitById(u.id);item.append(multi,check,b,cnt,del);(u.side==='special'?specialList:list).append(item)}
+ const u=activeUnit();$('noUnit').hidden=!!u;$('unitEditor').hidden=!u;$('noWaitUnit').hidden=!!u;$('waitEditor').hidden=!u;if(!u)return;
+ $('specialTypeRow').hidden=u.side!=='special';if(u.side==='special')$('specialType').value=u.kind;
+ $('unitName').value=u.name;$('unitColor').value=u.color;$('originInfo').textContent='初期 X '+Math.round(u.origin[0]*100)+'% / Y '+Math.round(u.origin[1]*100)+'%';
+ $('branches').replaceChildren();u.branches.forEach((b,i)=>{const btn=document.createElement('button');btn.textContent='ルート '+(i+1);btn.className='small'+(branchIdx===i?' active':'');btn.onclick=()=>{branchIdx=i;waitId=null;redrawUI()};$('branches').append(btn)});
+ $('addBranch').disabled=u.branches.length>=3;$('deleteBranch').disabled=u.branches.length<=1;
+ const b=activeBranch();$('departure').value=b.delay;$('travel').value=b.travel;$('people').value=b.people??'';$('action').value=b.action;
+ $('pathInfo').textContent=b.path.length>=2?'ルート設定済み：'+b.path.length+'座標点。地図上で描き直せます。':'ルート未設定：マップ上をドラッグして進軍経路を描きます。';
+ const waitList=$('waitList');waitList.replaceChildren();[...b.waits].sort((a,c)=>a.at-c.at).forEach((v,i)=>{const div=document.createElement('div');div.className='waititem'+(v.id===waitId?' active':'');const btn=document.createElement('button');btn.className='primaryText';btn.textContent='⏸ '+Math.round(v.at*100)+'%地点 · '+v.seconds+'秒';btn.onclick=()=>{waitId=v.id;redrawUI()};div.append(btn);const remove=document.createElement('button');remove.className='danger';remove.textContent='✕';remove.title='この待機を削除';remove.onclick=()=>{snap();b.waits=b.waits.filter(w=>w.id!==v.id);if(waitId===v.id)waitId=null;redrawUI()};div.append(remove);waitList.append(div)});
+ const wait=b.waits.find(w=>w.id===waitId);$('waitDetail').hidden=!wait;if(wait){$('waitTitle').textContent='待機地点を編集';$('waitSeconds').value=wait.seconds;$('waitPosition').value=Math.round(wait.at*100);$('waitPositionLabel').textContent=Math.round(wait.at*100)+'%'}
+ }
+function setTool(next){if(actionPlacement&&next!=='move'){actionPlacement=null;$('pendingHelp').hidden=true}if(spawnRouteEdit&&!['route','extend'].includes(next)){spawnRouteEdit=null;$('pendingHelp').hidden=true}hideWaitContext();tool=next;if(next!=='pointer')laser.p=null;for(const q of document.querySelectorAll('[data-quick]'))q.classList.toggle('active',q.dataset.quick===tool);for(const b of document.querySelectorAll('#tools button'))b.classList.toggle('active',b.dataset.tool===tool);$('help').textContent={move:'【駒の移動】味方・敵・特殊アイコンを直接ドラッグすると仮配置が変わります（進軍ルートは不変）。空白ドラッグで地図を移動できます。',select:'【駒の選択】地図上の味方・敵・特殊アイコンをタップすると、その部隊の設定が開きます。',route:'【進軍ルート】通常の出発点から描きます。再出現後は右クリック→「再出現後の進軍線」から描いてください。',extend:'【線の延長】選択中の進軍線の終点から続けて描けます。元の待機位置は維持します。',inkEraser:'【消しゴム】手書き線に触れるとその1ストロークだけ削除します。駒・進軍線は消しません。',pointer:'【レーザーポインター】動かすと赤いポインターが追従し、クリック／タップで強調リングが出ます。保存されません。',wait:'【待機を配置】選択ルートの上をタップすると待機マークが付きます。マークをドラッグすると位置を動かせます。',place:'【初期位置】部隊を選択 → 地図の好きな場所をタップで配置。丸い出発マークはドラッグで移動できます。既存ルートの出発点も一緒に移動します。',pen:'【自由線】地図の上をドラッグしてください。',note:'【文字】右側で文字を入力して、地図をタップしてください。',ring:'【強調】地図をタップすると丸印を置きます。',boss:'【敵総大将】地図をタップすると編集可能な特殊アイコンを追加します。',strong:'【強敵】地図をタップすると編集可能な特殊アイコンを追加します。',erase:'【アイコン削除】味方・敵のアイコン、特殊アイコンなどをタップして削除します。重なった場合は対象を選べます。部隊一覧の 🗑 からも削除可能。',siege:'【井闌車】地図をタップすると井闌車を追加し、通常の駒と同様に移動・編集できます。'}[next]||'';}
+for(const b of document.querySelectorAll('#tools button'))b.onclick=()=>{
+ if(b.dataset.tool==='place'){stop();progress=0;}
+ setTool(b.dataset.tool);render();
+};
+$('setOrigin').onclick=()=>{
+ if(!activeUnit())return;
+ stop();progress=0;setTool('place');render();
+ msg('味方・敵を選択して地図の好きな場所をタップするか、出発マークをドラッグしてください。ルートがある場合も出発点を更新します。');
+};
+function makeWait(at=.5,seconds=10){const b=activeBranch();if(!b)return;if(b.path.length<2){msg('先に進軍ルートを描いてください。');setTool('route');return}snap();let w={id:'w'+(nextId++),at:clamp(at),seconds};b.waits.push(w);waitId=w.id;stop();redrawUI();msg('待機地点を追加しました。時間はボタンですぐ変更できます。')}
+function originHits(p){
+ const r=canvas.getBoundingClientRect();return board.units.filter(u=>visibleOnMap(u)).map(u=>({
+  key:'units',id:u.id,branch:0,
+  dist:Math.hypot((u.origin[0]-p[0])*r.width,(u.origin[1]-p[1])*r.height),
+  title:(u.side==='friend'?'🔵 味方':u.side==='enemy'?'🔴 敵':'◆ '+specialName(u.kind))+'：'+u.name
+ })).filter(h=>h.dist<=34).sort((a,b)=>a.dist-b.dist);
+}
+function mapHits(p,onlyUnits=false){const rect=canvas.getBoundingClientRect(),hits=[],time=progress*totalSeconds();
+  for(const u of board.units){if(!visibleOnMap(u))continue;const presence=mode==='playback'?presenceAt(u,time):null;if(presence&&!presence.visible&&!showGhosts)continue;u.branches.forEach((b,branch)=>{if(mode==='meeting'&&branch>0)return;if(presence&&presence.phase==='spawn'&&branch>0)return;if(b.path.length<2&&branch!==0)return;
+    const pos=mode==='meeting'?(u.live||u.origin):presence?.phase==='spawn'?presence.position:presence&&!presence.visible?u.origin:b.path.length<2?u.origin:at(b.path,routeState(b,time).f);if(!pos)return;
+    const dist=Math.hypot((pos[0]-p[0])*rect.width,(pos[1]-p[1])*rect.height);
+    if(dist<=40)hits.push({key:'units',id:u.id,branch,dist,title:(u.side==='friend'?'🔵 味方':u.side==='enemy'?'🔴 敵':'◆ '+specialName(u.kind))+'：'+u.name+(u.branches.length>1?'／ルート'+(branch+1):'')});
+  })}
+  if(!onlyUnits){for(const [key,arr] of [['notes',board.notes],['rings',board.rings],['enemies',board.enemies],['warehouses',board.warehouses]]){
+      if(key==='warehouses'&&board.battlefield!=='castle')continue;
+      arr.forEach((v,i)=>{const dist=Math.hypot((v.p[0]-p[0])*rect.width,(v.p[1]-p[1])*rect.height);
+        if(dist<=40)hits.push({key,index:i,dist,title:key==='notes'?'文字：'+String(v.t).slice(0,15):key==='rings'?'強調マーク':key==='enemies'?(v.type==='boss'?'敵総大将':'強敵'):'井闌車'});
+      })
+  }}
+  // A unit with several branches may overlap itself; show it once at the closest branch.
+  hits.sort((a,b)=>a.dist-b.dist);
+  const seen=new Set();return hits.filter(h=>{if(h.key!=='units')return true;if(seen.has(h.id))return false;seen.add(h.id);return true});
+}
+function deleteMapHit(h){hideHitPicker();if(h.key==='units')return deleteUnitById(h.id);
+  const arr=board[h.key];if(!arr?.[h.index])return false;snap();arr.splice(h.index,1);redrawUI();msg(h.title+'を削除しました。「↶ 一つ戻す」で復元できます。');return true;
+}
+function showHitPicker(hits,p,mode){const div=$('hitPicker');div.replaceChildren();const head=document.createElement('div');head.className='picker-head';const label=document.createElement('strong');label.textContent='対象を選んでください';const close=document.createElement('button');close.type='button';close.textContent='× 閉じる';close.setAttribute('aria-label','候補を閉じる');close.onclick=hideHitPicker;head.append(label,close);div.append(head);
+  for(const h of hits){const b=document.createElement('button');b.type='button';b.className='picker-choice'+(mode==='erase'?' danger':'');b.textContent=h.title+(mode==='erase'?' を削除':' を選択');b.onclick=()=>{hideHitPicker();if(mode==='erase')deleteMapHit(h);else {unitSelect(h.id,h.branch,multiMode&&mode!=='place');if(mode==='place')msg('選択しました。出発マークをドラッグするか、地図の空いた場所をタップしてください。');}};div.append(b)}
+  div.hidden=false;const r=$('mapStage').getBoundingClientRect(),width=Math.min(280,r.width-16),px=p[0]*r.width,py=p[1]*r.height;
+  div.style.left=clamp(px+10,8,Math.max(8,r.width-width-8))+'px';div.style.top=clamp(py+10,8,Math.max(8,r.height-190))+'px';
+}
+function applyViewport(){const el=$('map');el.style.transform=`translate(${panX}px,${panY}px) scale(${zoom})`;$('zoomLabel').textContent=Math.round(zoom*100)+'%'}
+function viewportClamp(){const r=$('mapStage').getBoundingClientRect();panX=clamp(panX,Math.min(0,r.width*(1-zoom)),0);panY=clamp(panY,Math.min(0,r.height*(1-zoom)),0)}
+function setZoom(v,x=null,y=null){const r=$('mapStage').getBoundingClientRect(),next=clamp(v,1,3.5);x??=r.width/2;y??=r.height/2;panX=x-(x-panX)*next/zoom;panY=y-(y-panY)*next/zoom;zoom=next;viewportClamp();applyViewport()}
+$('zoomIn').onclick=()=>setZoom(zoom+.25);$('zoomOut').onclick=()=>setZoom(zoom-.25);$('zoomReset').onclick=()=>{zoom=1;panX=panY=0;applyViewport()};
+$('mapStage').addEventListener('wheel',e=>{if(recording)return;e.preventDefault();const r=$('mapStage').getBoundingClientRect();setZoom(zoom*(e.deltaY<0?1.18:1/1.18),e.clientX-r.left,e.clientY-r.top)},{passive:false});
+function setMode(next){if(recording)return;hideWaitContext();stop();mode=next;document.body.dataset.mode=next;$('modeMeeting').classList.toggle('active',next==='meeting');$('modePlayback').classList.toggle('active',next==='playback');if(next==='meeting'){setTool('move')}else{setTool('select')}render();msg(next==='meeting'?'作戦会議：駒をドラッグして仮配置を変更。空白ドラッグでマップ移動。再生用の初期位置・ルートは保持します。':'作戦再生：元の初期配置と進軍ルートで再生します。会議で動かした仮配置は変わりません。')}
+$('modeMeeting').onclick=()=>setMode('meeting');$('modePlayback').onclick=()=>setMode('playback');
+// Fit the whole 1200x800 map into the free viewport instead of clipping canvas with max-height.
+// Keep its natural aspect ratio: CSS must never cut off the bottom or right edge.
+let focusFitRaf=0;
+function fitFocusedMap(){
+  const stage=$('mapStage');
+  stage.style.width='';
+  if(focused){
+    const naturalWidth=stage.getBoundingClientRect().width;
+    const stageTop=stage.getBoundingClientRect().top;
+    const visualHeight=window.visualViewport?.height || window.innerHeight;
+    const availableHeight=Math.max(110,visualHeight-stageTop-12);
+    const border=2,aspect=canvas.width/canvas.height;
+    const fittedWidth=Math.min(naturalWidth,(availableHeight-border)*aspect+border);
+    stage.style.width=Math.max(1,Math.floor(fittedWidth))+'px';
+  }
+  viewportClamp();applyViewport();
+}
+function scheduleFocusFit(){cancelAnimationFrame(focusFitRaf);focusFitRaf=requestAnimationFrame(fitFocusedMap)}
+function toggleFocus(){
+  focused=!focused;
+  document.body.classList.toggle('focus-map',focused);
+  $('focusMap').textContent=focused?'▣ 管理画面に戻る':'⛶ マップを大きく';
+  if(focused)window.scrollTo(0,0);
+  scheduleFocusFit();
+}
+$('focusMap').onclick=toggleFocus;
+window.addEventListener('resize',scheduleFocusFit);
+window.visualViewport?.addEventListener('resize',scheduleFocusFit);
+$('advancedTools').addEventListener('toggle',scheduleFocusFit);
+if('ResizeObserver' in window){
+  const focusToolbarObserver=new ResizeObserver(()=>{if(focused)scheduleFocusFit()});
+  for(const selector of ['.workspace','.meetingbar','.groupbar','.quickbar','.display-toggles-row','#advancedTools']){
+    const element=document.querySelector(selector);if(element)focusToolbarObserver.observe(element);
+  }
+}
+
+for(const btn of document.querySelectorAll('[data-quick]'))btn.onclick=()=>{setTool(btn.dataset.quick);render()};
+for(const [id,key] of [['viewNames','viewNames'],['viewStates','viewStates'],['viewNumbers','viewNumbers'],['viewRoutes','viewRoutes'],['viewFriend','viewFriend'],['viewEnemy','viewEnemy'],['viewSpecial','viewSpecial']])$(id).onchange=()=>{viewNames=$('viewNames').checked;viewStates=$('viewStates').checked;viewNumbers=$('viewNumbers').checked;viewRoutes=$('viewRoutes').checked;viewFriend=$('viewFriend').checked;viewEnemy=$('viewEnemy').checked;viewSpecial=$('viewSpecial').checked;render()};
+$('multiMode').onclick=()=>{multiMode=!multiMode;refreshSelectionUI();msg(multiMode?'複数選択ON：駒を順にタップして選択・解除できます。選択した駒をドラッグすると一緒に動きます。':'複数選択OFF：通常の操作に戻りました。')};
+$('selectAllVisible').onclick=()=>{selectedIds=new Set(board.units.filter(u=>visibleOnMap(u)).map(u=>u.id));if(selectedIds.size)unitId=[...selectedIds][0];redrawUI()};
+$('clearSelection').onclick=()=>{selectedIds.clear();unitId=null;redrawUI()};
+$('resetSelected').onclick=()=>{const group=selectedUnits();if(!group.length){msg('駒を選択してください。');return}if(group.every(u=>u.live[0]===u.origin[0]&&u.live[1]===u.origin[1]&&!u.paused))return;snap();group.forEach(u=>{u.live=[...u.origin];u.paused=false});redrawUI();msg(group.length+'部隊を初期配置に戻しました。')};
+$('quickPause').onclick=()=>{const group=selectedUnits();if(!group.length){msg('先に駒を選択してください。');return}snap();const target=!group.every(u=>u.paused);group.forEach(u=>u.paused=target);redrawUI();msg(group.length+'部隊を'+(target?'待機':'待機解除')+'にしました。再生用の待機秒数には影響しません。')};
+$('resetLive').onclick=()=>{if(!board.units.some(u=>Math.hypot((u.live[0]-u.origin[0]),(u.live[1]-u.origin[1]))>.0001||u.paused)){msg('現在位置はすでに初期配置です。');return}if(!confirm('会議中の仮配置をすべて初期位置に戻しますか？\n保存済みの初期配置と進軍ルートはそのままです。'))return;snap();board.units.forEach(u=>{u.live=[...u.origin];u.paused=false});redrawUI();msg('仮配置を元に戻しました。')};
+$('commitLive').onclick=()=>{const group=selectedUnits();if(!group.length){msg('初期配置を確定する部隊を選択してください。');return}if(!confirm(group.length+'部隊の現在位置を、新しい初期配置として確定しますか？\nそれぞれの進軍ルートの始点も更新されます。'))return;snap();group.forEach(u=>moveOrigin(u,u.live));redrawUI();msg(group.length+'部隊の現在位置を初期配置に確定しました。')};
+$('quickSave').onclick=()=>save();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){hideHitPicker();hideWaitContext();if(actionPlacement||spawnRouteEdit)clearActionPlacement()}});
+
+// v0.6.1: right click / touch-and-hold a visible token to set waiting times.
+let wcUnitId=null,wcBranchIndex=0,wcPoint=null,longPress=null,lastLongPress=0;
+function cancelLongPress(){if(!longPress)return;clearTimeout(longPress.timer);longPress=null}
+function hideWaitContext(){cancelLongPress();$('waitContextMenu').hidden=true;wcUnitId=null}
+function wcUnit(){return board.units.find(u=>u.id===wcUnitId)||null}
+function wcBranch(){return wcUnit()?.branches[wcBranchIndex]||null}
+function wcWaitId(){const value=$('wcExisting').value;return value==='new'?null:value}
+function wcSetBranchOptions(){const u=wcUnit(),el=$('wcBranch');el.replaceChildren();for(let i=0;i<(u?.branches.length||0);i++){const opt=document.createElement('option');opt.value=i;opt.textContent='ルート '+(i+1);el.append(opt)}el.value=String(wcBranchIndex)}
+function wcSetWaitOptions(selected='new'){
+ const b=wcBranch(),select=$('wcExisting');select.replaceChildren();const fresh=document.createElement('option');fresh.value='new';fresh.textContent='＋ 新しい待機を追加';select.append(fresh);
+ if(b)for(const w of [...b.waits].sort((a,z)=>a.at-z.at)){const opt=document.createElement('option');opt.value=w.id;opt.textContent=Math.round(w.at*100)+'%地点・'+w.seconds+'秒';select.append(opt)}
+ select.value=b?.waits.some(w=>w.id===selected)?selected:'new';wcSyncDetails();
+}
+function wcSyncDetails(){
+ const b=wcBranch(),hasPath=!!b&&b.path.length>=2;
+ $('wcNoRoute').hidden=hasPath;$('wcRouteControls').hidden=!hasPath;
+ if(!hasPath)return;
+ const w=b.waits.find(w=>w.id===wcWaitId());const existing=!!w;
+ if(existing)$('wcSeconds').value=w.seconds;else $('wcSeconds').value='10';
+ const pct=existing?w.at:nearest(b.path,wcPoint||wcUnit()?.live||wcUnit()?.origin||[.5,.5]).f;
+ $('wcLocation').textContent=existing?'既存の待機：ルートの'+Math.round(pct*100)+'%地点。秒数だけ変更します。':'駒の現在位置に近いルートの'+Math.round(pct*100)+'%地点に待機を追加します。';
+ $('wcSaveWait').textContent=existing?'⏸ 待機秒数を更新':'＋ ここに待機を追加';$('wcDeleteWait').hidden=!existing;
+}
+function openWaitContext(hit,p,clientX,clientY){
+ if(recording)return;
+ stop(); // freeze playback while editing a wait
+ const u=board.units.find(u=>u.id===hit.id);if(!u)return;
+ hideHitPicker();cancelLongPress();
+ wcUnitId=u.id;wcBranchIndex=hit.branch||0;wcPoint=[...p];
+ if(selectedIds.size>1&&selectedIds.has(u.id)){unitId=u.id;branchIdx=wcBranchIndex;syncUI();timelineUI();render()}else unitSelect(u.id,wcBranchIndex); // keep group selection for batch actions
+ $('wcTitle').textContent=sideName(u)+'「'+u.name+'」の待機設定';
+ $('wcMeetingPause').textContent=u.paused?'▶ 会議用の待機を解除':'⏸ 会議用の待機にする';
+ $('wcDelay').value=u.branches[wcBranchIndex].delay;$('wcEventTime').value=currentSeconds();$('wcBatchRow').hidden=selectedIds.size<2;$('wcBatch').checked=selectedIds.size>1;
+ wcSetBranchOptions();wcSetWaitOptions();
+ const menu=$('waitContextMenu');menu.hidden=false;
+ const rect=menu.getBoundingClientRect();let left=clientX+10,top=clientY+10;
+ if(left+rect.width>window.innerWidth-10)left=clientX-rect.width-10;
+ if(top+rect.height>window.innerHeight-10)top=window.innerHeight-rect.height-10;
+ menu.style.left=Math.max(8,Math.min(left,window.innerWidth-rect.width-8))+'px';
+ menu.style.top=Math.max(8,Math.min(top,window.innerHeight-rect.height-8))+'px';
+}
+$('wcClose').onclick=hideWaitContext;
+$('wcMeetingPause').onclick=()=>{const u=wcUnit();if(!u)return;snap();u.paused=!u.paused;$('wcMeetingPause').textContent=u.paused?'▶ 会議用の待機を解除':'⏸ 会議用の待機にする';redrawUI();msg(u.name+'：会議中の'+(u.paused?'待機を設定':'待機を解除')+'しました。')};
+$('wcSaveDelay').onclick=()=>{const b=wcBranch();if(!b)return;const value=+$('wcDelay').value;if(!Number.isInteger(value)||value<0||value>3600){msg('出発前の待機は0～3600秒の整数で入力してください。');return}if(value!==b.delay){snap();b.delay=value;redrawUI();msg('出発前の待機を'+value+'秒に設定しました。')}else msg('出発前の待機は'+value+'秒です。')};
+$('wcBranch').onchange=()=>{wcBranchIndex=+$('wcBranch').value;branchIdx=wcBranchIndex;wcSetWaitOptions();redrawUI()};
+$('wcExisting').onchange=wcSyncDetails;
+for(const btn of $('wcPresets').querySelectorAll('button'))btn.onclick=()=>{$('wcSeconds').value=btn.dataset.wcSec};
+$('wcSaveWait').onclick=()=>{const b=wcBranch();if(!b||b.path.length<2)return;const value=+$('wcSeconds').value;if(!Number.isInteger(value)||value<0||value>3600){msg('待機時間は0～3600秒の整数で入力してください。');return}const id=wcWaitId(),w=b.waits.find(w=>w.id===id);if(w){if(w.seconds!==value){snap();w.seconds=value}waitId=w.id;wcSetWaitOptions(w.id);redrawUI();msg('既存の待機時間を'+value+'秒に変更しました。');return}
+ const loc=nearest(b.path,wcPoint||wcUnit()?.live||wcUnit()?.origin||[.5,.5]);snap();const nw={id:'w'+(nextId++),at:loc.f,seconds:value};b.waits.push(nw);waitId=nw.id;wcSetWaitOptions(nw.id);redrawUI();msg(wcUnit().name+'：ルートの'+Math.round(loc.f*100)+'%地点に'+value+'秒の待機を追加しました。')};
+$('wcDeleteWait').onclick=()=>{const b=wcBranch();if(!b)return;const id=wcWaitId();if(!b.waits.some(w=>w.id===id))return;snap();b.waits=b.waits.filter(w=>w.id!==id);if(waitId===id)waitId=null;wcSetWaitOptions();redrawUI();msg('進軍途中の待機を削除しました。')};
+// v0.7 action popup and hidden-token controls.
+$('wcExit').onclick=()=>{const u=wcUnit(),time=$('wcEventTime').value.trim()===''?NaN:+$('wcEventTime').value;if(!u)return;const ids=captureActionGroups(u.id,$('wcBatch').checked);if(addEvents(ids,'exit',time)){hideWaitContext();renderOutRoster()}};
+$('wcSpawn').onclick=()=>{const u=wcUnit();if(!u)return;const ids=captureActionGroups(u.id,$('wcBatch').checked);beginSpawnPlacement(ids,$('wcEventTime').value.trim()===''?NaN:+$('wcEventTime').value,u.id)};
+$('wcSpawnRoute').onclick=()=>{const u=wcUnit();if(!u)return;const events=sortedEvents(u).filter(e=>e.type==='spawn');if(!events.length){msg('先にこの駒の再出現時刻と場所を設定してください。');return}const t=Number($('wcEventTime').value);const event=[...events].reverse().find(e=>e.time<=t)||events.at(-1);beginSpawnRoute(u,event.id)};
+$('wcShowTimeline').onclick=()=>{hideWaitContext();timelineUI();if(focused)toggleFocus();$('eventPanel').scrollIntoView({behavior:'smooth',block:'nearest'})};
+$('eventAddExit').onclick=()=>{const u=activeUnit();if(u)addEvents([u.id],'exit',currentSeconds())};
+$('eventAddSpawn').onclick=()=>{const u=activeUnit();if(u)beginSpawnPlacement([u.id],currentSeconds())};
+$('actionTime').onchange=()=>setActionSeconds(+$('actionTime').value);
+$('actionSeek').oninput=()=>setActionSeconds(+$('actionSeek').value);
+$('outRosterToggle').onclick=()=>{outRosterOpen=!outRosterOpen;$('outRoster').hidden=!outRosterOpen;if(outRosterOpen)renderOutRoster()};
+$('ghostToggle').onchange=()=>{showGhosts=$('ghostToggle').checked;render()};
+$('pendingCancel').onclick=()=>{clearActionPlacement();msg('地点指定をキャンセルしました。')};
+// Intercept placement or post-respawn route creation before the usual board handlers.
+canvas.addEventListener('pointerdown',e=>{
+ if((!actionPlacement&&!spawnRouteEdit)||recording||e.button!==0)return;
+ e.preventDefault();e.stopImmediatePropagation();hideHitPicker();const p=getPoint(e);
+ if(actionPlacement){const job=actionPlacement;actionPlacement=null;$('pendingHelp').hidden=true;
+  if(job.editId){const u=board.units.find(u=>u.id===job.ids[0]),ev=u?.events.find(x=>x.id===job.editId);if(ev){snap();ev.point=[...p];if(ev.path?.length)ev.path[0]=[...p];redrawUI();msg(u.name+'の再出現位置を更新しました。')}}
+  else {const done=addEvents(job.ids,'spawn',job.time,p,job.anchorId);
+   if(done&&job.ids.length===1){const u=board.units.find(x=>x.id===job.ids[0]),event=u?.events.at(-1);if(event?.type==='spawn'){beginSpawnRoute(u,event.id);return}}
+  }
+  setTool('move');return;
+ }
+ const job=spawnRouteEdit,u=board.units.find(u=>u.id===job.unitId),event=u?.events.find(x=>x.id===job.eventId&&x.type==='spawn');
+ if(!event){clearActionPlacement();return}unitId=u.id;
+ const start=job.extend&&event.path.length>=2?event.path.at(-1):event.point;
+ const dist=Math.hypot((p[0]-start[0])*canvas.width,(p[1]-start[1])*canvas.height);
+ draft={kind:job.extend?'extendRespawnRoute':'respawnRoute',unitId:u.id,eventId:event.id,points:dist>7?[[...start],p]:[[...start]]};canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');render();
+},{capture:true});
+// Right click on the token, regardless of the active tool. Blank map retains native menu.
+canvas.addEventListener('contextmenu',e=>{
+ const p=getPoint(e),hits=mapHits(p,true);if(!hits.length)return;
+ e.preventDefault();if(Date.now()-lastLongPress<900)return;
+ const hit=hits.find(h=>h.id===unitId)||hits[0];openWaitContext(hit,p,e.clientX,e.clientY);
+});
+// Touch long press applies while a token can normally be selected or moved.
+// A movement of 6 CSS pixels cancels the hold so ordinary drag remains responsive.
+function armLongPress(e){
+ if(e.pointerType!=='touch'||e.button!==0||recording||!['move','select'].includes(tool))return;
+ const p=getPoint(e),hits=mapHits(p,true);if(!hits.length)return;
+ const hit=hits.find(h=>h.id===unitId)||hits[0];cancelLongPress();
+ const info={id:e.pointerId,x:e.clientX,y:e.clientY,p,hit,timer:null};longPress=info;
+ info.timer=setTimeout(()=>{
+  if(longPress!==info||gesture?.moved||draft)return;
+  longPress=null;lastLongPress=Date.now();gesture=null;canvas.classList.remove('dragging');
+  try{if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId)}catch(err){}
+  openWaitContext(hit,p,info.x,info.y);
+ },600);
+}
+canvas.addEventListener('pointermove',e=>{
+ if(longPress&&e.pointerId===longPress.id&&Math.hypot(e.clientX-longPress.x,e.clientY-longPress.y)>6)cancelLongPress();
+}, {capture:true});
+canvas.addEventListener('pointerup',cancelLongPress,{capture:true});
+canvas.addEventListener('pointercancel',cancelLongPress,{capture:true});
+window.addEventListener('blur',cancelLongPress);
+document.addEventListener('pointerdown',e=>{if(!$('waitContextMenu').hidden&&!e.target.closest('#waitContextMenu'))hideWaitContext()},{capture:true});
+window.addEventListener('resize',()=>{if(!$('waitContextMenu').hidden)hideWaitContext()});
+
+function eraseFreehandAt(p){if(!gesture||gesture.kind!=='inkErase')return;
+ const r=canvas.getBoundingClientRect();let index=-1,closest=22;
+ for(let i=board.freeLines.length-1;i>=0;i--){const line=board.freeLines[i];if(!line.points?.length)continue;
+  const path=line.points;for(let j=0;j<path.length;j++){const a=path[j],b=path[Math.min(j+1,path.length-1)],dx=(b[0]-a[0])*r.width,dy=(b[1]-a[1])*r.height,px=(p[0]-a[0])*r.width,py=(p[1]-a[1])*r.height,k=clamp((px*dx+py*dy)/(dx*dx+dy*dy||1));const d=Math.hypot(px-k*dx,py-k*dy);
+   if(d<closest){index=i;closest=d}}
+ }
+ if(index>=0){if(!gesture.erased){snap();gesture.erased=true}board.freeLines.splice(index,1);render()}
+}
+canvas.addEventListener('pointerleave',()=>{if(tool==='pointer'){laser.p=null;render()}});
+canvas.addEventListener('pointerdown',e=>{if(recording||e.button>0)return;armLongPress(e);hideHitPicker();const p=getPoint(e),u=activeUnit(),b=activeBranch();stop();if(tool==='move'){const hits=mapHits(p,true);if(hits.length){const h=hits.find(q=>q.id===unitId)||hits[0];if(hits.length>1&&!hits.some(q=>q.id===unitId)){showHitPicker(hits,p,'select');return}
+ if((multiMode||e.shiftKey)&&!selectedIds.has(h.id)){unitSelect(h.id,h.branch,true);return}if(!selectedIds.has(h.id)){unitSelect(h.id,h.branch)}else{unitId=h.id;branchIdx=h.branch;syncUI();timelineUI();render()}
+ const group=selectedUnits(),origin=Object.fromEntries(group.map(u=>[u.id,[...u.live]]));gesture={kind:'liveDrag',id:h.id,start:p,moved:false,toggleOnTap:(multiMode||e.shiftKey),origin,group:group.map(u=>u.id)};canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');return}gesture={kind:'mapPan',clientX:e.clientX,clientY:e.clientY,x:panX,y:panY};canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');return}if(tool==='select'){const hits=mapHits(p,true);if(hits.length===1)unitSelect(hits[0].id,hits[0].branch,multiMode||e.shiftKey);else if(hits.length>1)showHitPicker(hits,p,'select');else msg('味方・敵の部隊・特殊アイコンをタップしてください。');return}if(tool==='pointer'){laser.p=p;laser.pulsePoint=p;laser.pulseUntil=performance.now()+750;const tickPulse=()=>{if(performance.now()<laser.pulseUntil){render();requestAnimationFrame(tickPulse)}else render()};requestAnimationFrame(tickPulse);render();return}
+ if(tool==='inkEraser'){gesture={kind:'inkErase',erased:false};eraseFreehandAt(p);return}
+ if(tool==='extend'){if(!b||!u||b.path.length<2){msg('先に進軍線を描くか、対象のルートを選んでください。');return}const start=b.path.at(-1),dist=Math.hypot((p[0]-start[0])*canvas.width,(p[1]-start[1])*canvas.height);draft={kind:'extendRoute',unitId:u.id,branch:branchIdx,points:dist>7?[[...start],p]:[[...start]]};canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');render();return}
+ if(tool==='route'){if(!b||!u){msg('駒を選んでください。');return}
+ snap();const start=[...u.origin],distance=Math.hypot((p[0]-start[0])*canvas.width,(p[1]-start[1])*canvas.height);
+ draft={kind:'route',points:distance>8?[start,p]:[start]};canvas.setPointerCapture(e.pointerId);render();return}
+ if(tool==='pen'){snap();draft={kind:'pen',points:[p],color:$('ink').value,width:+$('penWidth').value};canvas.setPointerCapture(e.pointerId);return}
+ if(tool==='wait'){if(!b||b.path.length<2){msg('先にルートを設定してください。');return}let existing=b.waits.find(w=>{const loc=at(b.path,w.at);return Math.hypot((loc[0]-p[0])*canvas.width,(loc[1]-p[1])*canvas.height)<24});if(existing){snap();waitId=existing.id;gesture={kind:'waitDrag',id:existing.id,moved:false};canvas.setPointerCapture(e.pointerId);redrawUI();return}
+ const near=nearest(b.path,p);if(near.dist>55){msg('ルートの近くをタップしてください（線から約55px以内）。');return}makeWait(near.f);return}
+ if(tool==='place'){
+   const hits=originHits(p);
+   const selected=hits.find(h=>h.id===unitId);
+   if(!selected&&hits.length>1){showHitPicker(hits,p,'place');return}
+   if(hits.length){const h=selected||hits[0];
+     if(h.id!==unitId)unitSelect(h.id);
+     gesture={kind:'originDrag',id:h.id,start:p,moved:false};canvas.setPointerCapture(e.pointerId);
+     msg('出発マークをドラッグして初期位置を移動できます。');return;
+   }
+   if(!u){msg('先に部隊を追加または選択してください。');return}
+   snap();moveOrigin(u,p);if(mode==='meeting')setTool('move');redrawUI();msg('「'+u.name+'」の初期位置を変更しました。以後はそのまま駒をドラッグできます。');return;
+ }
+ if(tool==='note'){const s=$('annotationText').value.trim();if(!s){msg('右側の「配置する文字」を入力してください。');return}snap();board.notes.push({p,t:s,c:$('ink').value,size:+$('textSize').value})}
+ if(tool==='ring'){snap();board.rings.push({p,c:$('ink').value})}
+ if(['boss','strong','siege'].includes(tool)){if(board.units.filter(u=>u.side==='special').length>=MAX_SPECIAL){msg('特殊アイコンは最大'+MAX_SPECIAL+'個です。');return}snap();const created=newUnit('special',tool);moveOrigin(created,p);unitId=created.id;selectedIds=new Set([created.id]);branchIdx=0;waitId=null;setTool('move');msg(specialName(created.kind)+'を追加しました。ドラッグで移動できます。')}
+ if(tool==='erase'){const hits=mapHits(p);if(hits.length===1)deleteMapHit(hits[0]);else if(hits.length>1)showHitPicker(hits,p,'erase');else msg('削除したいアイコンの中央付近をタップしてください。');return;}
+ redrawUI();});
+canvas.addEventListener('pointermove',e=>{const p=getPoint(e);if(tool==='pointer'){laser.p=p;render();return}if(gesture?.kind==='inkErase'){eraseFreehandAt(p);return}if(gesture?.kind==='mapPan'){panX=gesture.x+e.clientX-gesture.clientX;panY=gesture.y+e.clientY-gesture.clientY;viewportClamp();applyViewport();return}if(gesture?.kind==='liveDrag'){const g=gesture,r=canvas.getBoundingClientRect();if(!g.moved&&Math.hypot((p[0]-g.start[0])*r.width,(p[1]-g.start[1])*r.height)<5)return;const group=g.group.map(id=>board.units.find(x=>x.id===id)).filter(Boolean);if(!group.length)return;if(!g.moved){snap();g.moved=true}
+ const dx=p[0]-g.start[0],dy=p[1]-g.start[1],xs=group.map(u=>g.origin[u.id][0]),ys=group.map(u=>g.origin[u.id][1]);
+ const safeDx=clamp(dx,-Math.min(...xs),1-Math.max(...xs)),safeDy=clamp(dy,-Math.min(...ys),1-Math.max(...ys));
+ for(const u of group)u.live=[g.origin[u.id][0]+safeDx,g.origin[u.id][1]+safeDy];render();return}if(draft){const last=draft.points.at(-1);if(Math.hypot((last[0]-p[0])*canvas.width,(last[1]-p[1])*canvas.height)>4)draft.points.push(p);render()}else if(gesture?.kind==='waitDrag'){const b=activeBranch(),w=b?.waits.find(w=>w.id===gesture.id);if(w){w.at=nearest(b.path,p).f;gesture.moved=true;redrawUI()}}
+ else if(gesture?.kind==='originDrag'){
+  const g=gesture,r=canvas.getBoundingClientRect();
+  if(!g.moved&&Math.hypot((p[0]-g.start[0])*r.width,(p[1]-g.start[1])*r.height)<5)return;
+  const u=board.units.find(x=>x.id===g.id);if(!u)return;
+  if(!g.moved){snap();g.moved=true;}
+  moveOrigin(u,p);render();
+ }});
+function finishPointer(){if(draft){if(draft.kind==='route'){const b=activeBranch(),u=activeUnit();if(b){if(draft.points.length>1){b.path=draft.points}else history.pop()}}
+else if(draft.kind==='extendRoute'){const u=board.units.find(x=>x.id===draft.unitId),b=u?.branches[draft.branch];if(b&&draft.points.length>1&&pathLength(draft.points)>7){snap();const old=[...b.path];b.path=[...old,...draft.points.slice(1)];keepWaitLocations(b.waits,old,b.path);msg(u.name+'：進軍線を延長しました。元の待機位置も維持しました。')}}
+else if(draft.kind==='respawnRoute'||draft.kind==='extendRespawnRoute'){const u=board.units.find(x=>x.id===draft.unitId),ev=u?.events.find(x=>x.id===draft.eventId);if(ev&&draft.points.length>1&&pathLength(draft.points)>7){snap();if(draft.kind==='extendRespawnRoute'&&ev.path.length>=2){const old=[...ev.path];ev.path=[...old,...draft.points.slice(1)];keepWaitLocations(ev.waits,old,ev.path)}else{ev.path=draft.points.map(p=>[...p]);ev.waits=[]}msg(u.name+'：再出現後の進軍線を'+(draft.kind==='extendRespawnRoute'?'延長':'設定')+'しました。')}spawnRouteEdit=null;$('pendingHelp').hidden=true;setTool('move')}
+else if(draft.kind==='pen'){if(draft.points.length>1)board.freeLines.push({points:draft.points,color:draft.color,width:draft.width});else history.pop()}draft=null;redrawUI()}if(gesture){const g=gesture;gesture=null;redrawUI();canvas.classList.remove('dragging');if(g.kind==='inkErase'&&g.erased)msg('手書き線だけを消しました。↶ 戻すで復元できます。');if(g.kind==='originDrag'&&g.moved)msg('出発位置を移動しました。進軍ルートの始点も更新されました。');if(g.kind==='liveDrag'&&!g.moved&&g.toggleOnTap)unitSelect(g.id,0,true);if(g.kind==='liveDrag'&&g.moved)msg(g.group.length+'部隊の仮配置を変更しました。初期配置・進軍ルートは変わりません。');if(g.moved||draft)scheduleAutosave();}}
+canvas.addEventListener('pointerup',finishPointer);canvas.addEventListener('pointercancel',finishPointer);
+function updateWait(key,v){const b=activeBranch(),w=b?.waits.find(w=>w.id===waitId);if(!w)return;snap();w[key]=key==='at'?clamp(v):clamp(v,0,3600);redrawUI()}
+$('addWaitMid').onclick=()=>makeWait(.5);$('placeWait').onclick=()=>{setTool('wait');msg('選択ルート上の待機したい位置をタップしてください。')};$('waitSeconds').onchange=()=>updateWait('seconds',Math.round(num($('waitSeconds').value,0)));$('waitPosition').onchange=()=>updateWait('at',num($('waitPosition').value)/100);$('waitPosition').oninput=()=>{$('waitPositionLabel').textContent=$('waitPosition').value+'%'};
+for(const btn of $('waitPresets').querySelectorAll('button'))btn.onclick=()=>updateWait('seconds',+btn.dataset.seconds);
+for(const [id,p] of [['waitStart',0],['waitCenter',.5],['waitEnd',1]])$(id).onclick=()=>updateWait('at',p);
+$('deleteWait').onclick=()=>{const b=activeBranch();if(!b)return;snap();b.waits=b.waits.filter(w=>w.id!==waitId);waitId=null;redrawUI()};
+function addAndPlace(side){
+ if(board.units.filter(u=>u.side===side).length>=MAX_PER_SIDE){msg('部隊数の上限に達しています。');return;}
+ snap();const u=newUnit(side);if(!u)return;
+ unitSelect(u.id);stop();progress=0;setTool('place');render();
+ msg((side==='friend'?'味方':'敵')+'「'+u.name+'」を追加しました。地図をタップして初期位置を決めてください。');
+}
+$('addFriendly').onclick=$('quickAddFriend').onclick=()=>addAndPlace('friend');
+$('addEnemy').onclick=$('quickAddEnemy').onclick=()=>addAndPlace('enemy');
+function addAndPlaceSpecial(kind){if(board.units.filter(u=>u.side==='special').length>=MAX_SPECIAL){msg('特殊アイコンは最大'+MAX_SPECIAL+'個です。');return}snap();const u=newUnit('special',kind);if(!u)return;unitSelect(u.id);stop();progress=0;setTool('place');render();msg(specialName(kind)+'を追加しました。地図上の位置をタップしてください。')}
+for(const kind of ['boss','strong','siege']){const suffix=kind==='boss'?'Boss':kind==='strong'?'Strong':'Siege';$('add'+suffix).onclick=$('quickAdd'+suffix).onclick=()=>addAndPlaceSpecial(kind)}
+$('specialType').onchange=()=>{const u=activeUnit();if(!u||u.side!=='special')return;snap();const old=u.kind;u.kind=$('specialType').value;if(u.color===SPECIAL_TYPES[old].color)u.color=SPECIAL_TYPES[u.kind].color;redrawUI();msg('特殊アイコンの種類を'+specialName(u.kind)+'に変更しました。')};
+$('showSpecial').onclick=()=>{snap();board.units.filter(u=>u.side==='special').forEach(u=>u.visible=true);redrawUI()};
+$('hideSpecial').onclick=()=>{snap();board.units.filter(u=>u.side==='special').forEach(u=>u.visible=false);redrawUI()};
+$('showAll').onclick=()=>{snap();board.units.filter(u=>u.side!=='special').forEach(u=>u.visible=true);redrawUI()};$('hideAll').onclick=()=>{snap();board.units.filter(u=>u.side!=='special').forEach(u=>u.visible=false);redrawUI()};$('solo').onclick=()=>{snap();board.units.forEach(u=>u.visible=u.id===unitId);redrawUI()};
+$('filterFriendly').onchange=redrawUI;$('filterEnemy').onchange=redrawUI;
+$('unitName').onchange=()=>{let u=activeUnit();if(!u)return;snap();u.name=$('unitName').value.trim().slice(0,18)||u.name;redrawUI()};$('unitColor').onchange=()=>{snap();activeUnit().color=$('unitColor').value;redrawUI()};
+for(const [id,key,min,max,allowBlank] of [['departure','delay',0,3600,false],['travel','travel',1,3600,false],['people','people',0,999,true]])$(id).onchange=()=>{const b=activeBranch();if(!b)return;snap();b[key]=allowBlank&&$(id).value.trim()===''?null:clamp(Math.round(num($(id).value)),min,max);redrawUI()};
+$('action').onchange=()=>{snap();activeBranch().action=$('action').value;redrawUI()};
+$('addBranch').onclick=()=>{const u=activeUnit();if(!u||u.branches.length>=3)return;snap();u.branches.push(newBranch());branchIdx=u.branches.length-1;waitId=null;redrawUI();setTool('route')};
+$('deleteBranch').onclick=()=>{const u=activeUnit();if(!u||u.branches.length<=1)return;if(!confirm('選択ルートと待機地点を削除します。よろしいですか？'))return;snap();u.branches.splice(branchIdx,1);branchIdx=Math.min(branchIdx,u.branches.length-1);waitId=null;redrawUI()};
+$('deleteUnit').onclick=()=>{const u=activeUnit();if(u)deleteUnitById(u.id)};
+$('title').onchange=()=>{if(board.title!==$('title').value){snap();board.title=$('title').value;render()}};$('battlefield').onchange=()=>{snap();board.battlefield=$('battlefield').value;redrawUI()};$('showPaths').onchange=()=>{showPaths=$('showPaths').checked;render()};
+$('clearMarks').onclick=()=>{if(!confirm('文字・自由線・強調マークを削除しますか？（特殊アイコンは残ります）'))return;snap();board.notes=[];board.rings=[];board.freeLines=[];redrawUI()};
+function historyMove(from,to,message){if(!from.length){msg('これ以上操作を'+(message==='戻しました'?'戻せ':'やり直せ')+'ません。');return}stop();to.push(deep(board));if(to.length>75)to.shift();board=from.pop();sanitiseSelection();branchIdx=Math.min(branchIdx,Math.max(0,(activeUnit()?.branches.length||1)-1));waitId=null;redrawUI();scheduleAutosave();msg('操作を'+message+'。')}
+$('undo').onclick=()=>historyMove(history,redoHistory,'戻しました');
+$('redo').onclick=()=>historyMove(redoHistory,history,'やり直しました');
+document.addEventListener('keydown',e=>{if(e.target instanceof HTMLElement&&e.target.closest('input,textarea,select,[contenteditable]'))return;if(e.ctrlKey||e.metaKey){if(e.key.toLowerCase()==='z'){e.preventDefault();(e.shiftKey?$('redo'):$('undo')).click()}else if(e.key.toLowerCase()==='y'){e.preventDefault();$('redo').click()}}});
+$('play').onclick=()=>{if(recording)return;if(progress>=1)progress=0;playOrigin=performance.now()-progress*totalSeconds()*1000/num($('rate').value,1);playing=true};$('pause').onclick=()=>{stop();render()};$('reset').onclick=()=>{stop();progress=0;render()};$('seek').oninput=()=>{if(recording)return;stop();progress=+ $('seek').value/1000;render()};$('rate').onchange=()=>{if(playing)playOrigin=performance.now()-progress*totalSeconds()*1000/num($('rate').value,1);scheduleAutosave()};
+function tick(now){if(playing){progress=clamp((now-playOrigin)*num($('rate').value,1)/(totalSeconds()*1000));if(progress>=1)playing=false;render()}requestAnimationFrame(tick)}requestAnimationFrame(tick);
+function download(blob,name){const a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),60000)}
+function save(){capturePlan();const o=workspaceData();download(new Blob([JSON.stringify(o)],{type:'application/json'}),(board.title||'チュール式戦術ボード')+'_全作戦案.json');msg(plans.length+'案を含む作戦データを保存しました（v0.7互換形式）。')}
+$('save').onclick=$('saveAgain').onclick=save;
+$('png').onclick=()=>{render();canvas.toBlob(blob=>{if(blob)download(blob,(board.title||'チュール式戦術ボード')+'.png')},'image/png')};
+async function setBackground(src){return new Promise((resolve,reject)=>{if(!src){background=null;backgroundSrc='';canvas.width=1200;canvas.height=800;render();scheduleFocusFit();resolve();return}const img=new Image();img.onload=()=>{background=img;backgroundSrc=src;canvas.width=1200;canvas.height=Math.max(300,Math.round(1200*img.naturalHeight/img.naturalWidth));render();scheduleFocusFit();resolve()};img.onerror=()=>reject(new Error('背景画像が読み込めません。'));img.src=src})}
+$('newBlank').onclick=()=>{if(!confirm('現在の作戦案の部隊・経路・書き込みを白紙にしますか？\n他の作戦案と共通の背景画像は残します。'))return;resetBoard(false);scheduleAutosave()};
+$('demo').onclick=()=>{if(board.units.some(u=>u.branches.some(b=>b.path.length>1))&&!confirm('作業中の内容を消して動作デモに切り替えますか？'))return;resetBoard(false);board.title='作戦例：左右から挟撃・敵は中央で待機';board.units[0].branches[0].path=[[.08,.66],[.22,.6],[.4,.49],[.64,.5],[.82,.45]];board.units[0].branches[0].waits=[{id:'w'+(nextId++),at:.4,seconds:10},{id:'w'+(nextId++),at:.72,seconds:5}];board.units[0].branches[0].travel=18;board.units[0].branches[0].people=12;board.units[1].branches[0].path=[[.08,.22],[.3,.27],[.52,.4],[.82,.45]];board.units[1].branches[0].delay=6;board.units[1].branches[0].travel=14;board.units[1].branches[0].people=8;board.units[2].branches[0].path=[[.85,.42],[.65,.5],[.48,.54]];board.units[2].branches[0].delay=4;board.units[2].branches[0].travel=13;board.units[2].branches[0].waits=[{id:'w'+(nextId++),at:.35,seconds:8}];const other=newUnit('enemy');other.branches[0].path=[[.84,.76],[.68,.64],[.52,.54]];other.branches[0].delay=12;other.branches[0].travel=12;board.units[2].events=[newEvent('exit',25),newEvent('spawn',36,[.82,.25])];board.units[2].events[1].path=[[.82,.25],[.67,.3],[.50,.46]];board.units[2].events[1].travel=14;board.units.forEach(u=>{u.origin=[...(u.branches[0].path[0]||u.origin)];u.live=[...u.origin]});unitId=board.units[0].id;waitId=board.units[0].branches[0].waits[0].id;history=[];redoHistory=[];selectedIds=new Set([unitId]);redrawUI();scheduleAutosave();msg('デモ作戦を読み込みました。▶ 再生で敵味方が動き、⏸ マークの位置と秒数を編集できます。')};
+$('chooseImage').onclick=$('changeImage').onclick=()=>$('imageFile').click();$('mapStageChoose').onclick=()=>$('imageFile').click();$('imageFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=async()=>{try{await setBackground(reader.result);scheduleAutosave();msg('背景画像を読み込みました。部隊やルートは維持しています。')}catch(err){msg(err.message)}};reader.readAsDataURL(file);e.target.value=''};
+function loadLegacy(d){const p=d.plan;if(!p||!Array.isArray(p.routes)||p.routes.length!==4)throw Error('旧JSONの部隊データが正しくありません');const src=d.imageSrc||'';const initial=['#b54152','#c18b2b','#5faaaa','#5b9b57'];let units=[];const count=Math.max(1,Math.min(4,num(d.count,4)));for(let i=0;i<count;i++){let branches=[];const countBranch=Math.max(1,Math.min(3,num(p.splits?.[i],1)));for(let j=0;j<countBranch;j++){const path=[p.routes,p.secondary||[],p.tertiary||[]][j]?.[i]||[];if(!Array.isArray(path)||!path.every(pt))throw Error('旧JSONの座標に問題があります');const s=p.settings?.[i]?.[j]||{};const b={path,delay:clamp(num(s.delay),0,3600),travel:clamp(num(d.duration,12),1,3600),people:s.people??null,action:s.action==='defend'?'defend':'attack',waits:[]};if(num(s.hold)>0)b.waits.push({id:'w'+(nextId++),at:clamp(num(s.holdAt,.5)),seconds:clamp(num(s.hold),0,3600)});branches.push(b)}units.push({id:'u'+(nextId++),side:'friend',name:String.fromCharCode(65+i),color:initial[i],visible:true,origin:branches[0].path?.[0]||[.2,.5],live:branches[0].path?.[0]||[.2,.5],paused:false,branches})}
+ return {version:9,title:d.operationName||'旧しらす式から読込',battlefield:p.battlefield==='castle'?'castle':'fort',units,notes:p.notes||[],rings:p.rings||[],enemies:p.enemies||[],freeLines:p.freeLines||[],warehouses:p.warehouses||[],targets:p.targets||[],_src:src};}
+function cleanBoard(o){
+ if(!o||!Array.isArray(o.units)||o.units.length>MAX_PER_SIDE*2+MAX_SPECIAL)throw Error('駒データが不正です');
+ for(const key of ['notes','rings','enemies','freeLines','warehouses'])if(!Array.isArray(o[key])||o[key].length>3000)throw Error('注釈データが不正です');
+ // v0.5.1 and older stores boss/strong/siege as static markers. Convert each into an editable special piece.
+ if(o.enemies.length||o.warehouses.length){const used=new Set(o.units.map(u=>u.id)),specialCount=o.units.filter(u=>u.side==='special').length;
+  if(specialCount+o.enemies.length+o.warehouses.length>MAX_SPECIAL)throw Error('従来の特殊マークの数が上限を超えています。元データを維持してください');
+  let index=1;const next=()=>{let id;do{id='u'+index++}while(used.has(id));used.add(id);return id};
+  function migrate(kind,p,legacyRecord=null){if(!pt(p))throw Error('特殊マークの位置データが不正です');const id=next(),count=o.units.filter(u=>u.side==='special'&&u.kind===kind).length;
+   const converted={id,side:'special',kind,name:specialName(kind)+(count+1),color:SPECIAL_TYPES[kind].color,visible:true,origin:[...p],live:[...p],paused:false,branches:[newBranch()]};
+   if(legacyRecord)converted.legacyWarehouse=deep(legacyRecord);o.units.push(converted);}
+  o.enemies.forEach(v=>migrate(v.type==='boss'?'boss':'strong',v.p));o.warehouses.forEach(v=>migrate('siege',v.p,v));o.enemies=[];o.warehouses=[];
+ }
+ const ids=new Set(),sides={friend:0,enemy:0,special:0};
+ o.units.forEach(u=>{if(!u||!['friend','enemy','special'].includes(u.side)||!Array.isArray(u.branches)||u.branches.length<1||u.branches.length>3||typeof u.id!=='string'||typeof u.name!=='string'||u.name.length>18||typeof u.color!=='string'||!/^#[0-9a-f]{6}$/i.test(u.color)||!pt(u.origin))throw Error('駒データが不正です');
+  if(u.side==='special'&&!SPECIAL_TYPES[u.kind])throw Error('特殊アイコンの種類が不正です');sides[u.side]++;if(sides[u.side]>(u.side==='special'?MAX_SPECIAL:MAX_PER_SIDE))throw Error('駒の数が多すぎます');if(ids.has(u.id))throw Error('駒IDが重複しています');ids.add(u.id);if(!pt(u.live))u.live=[...u.origin];u.paused=!!u.paused;u.visible=u.visible!==false;
+  if(u.events===undefined)u.events=[];
+  if(!Array.isArray(u.events)||u.events.length>MAX_EVENTS)throw Error('行動データの件数が不正です');
+  const eventIds=new Set();for(const e of u.events){if(!e||!['exit','spawn'].includes(e.type)||typeof e.id!=='string'||eventIds.has(e.id)||!Number.isFinite(e.time)||e.time<0||e.time>3600)throw Error('退場・再出現の命令が不正です');eventIds.add(e.id);
+   if(e.type==='spawn'){if(!pt(e.point)||!Array.isArray(e.path)||e.path.length>20000||!e.path.every(pt)||!Number.isFinite(e.delay)||e.delay<0||e.delay>3600||!Number.isFinite(e.travel)||e.travel<1||e.travel>3600||!Array.isArray(e.waits)||e.waits.length>200||!e.waits.every(w=>Number.isFinite(w.at)&&w.at>=0&&w.at<=1&&Number.isFinite(w.seconds)&&w.seconds>=0&&w.seconds<=3600))throw Error('再出現後の移動データが不正です');if(e.path.length>=2&&Math.hypot(e.point[0]-e.path[0][0],e.point[1]-e.path[0][1])>.001)e.path[0]=[...e.point]}
+  }
+  u.branches.forEach(b=>{if(!Array.isArray(b.path)||b.path.length>20000||!b.path.every(pt)||!Number.isFinite(b.delay)||b.delay<0||b.delay>3600||!Number.isFinite(b.travel)||b.travel<1||b.travel>3600||!Array.isArray(b.waits)||b.waits.length>200||!b.waits.every(w=>Number.isFinite(w.at)&&w.at>=0&&w.at<=1&&Number.isFinite(w.seconds)&&w.seconds>=0&&w.seconds<=3600))throw Error('経路または待機データが不正です')})});
+ o.version=12;o.timelineEnd=clamp(num(o.timelineEnd,12),12,3600);return o;
+}
+async function loadJSON(file){try{if(file.size>65*1024*1024)throw Error('65MBを超えるJSONは読み込めません');await importWorkspace(JSON.parse(await file.text()));msg('JSONから'+plans.length+'案を読み込みました。以前の拡張版と旧しらす式にも対応しています。')}catch(err){msg('読み込みに失敗しました：'+err.message)}}
+$('loadTop').onclick=$('loadAgain').onclick=()=>$('jsonFile').click();$('jsonFile').onchange=async e=>{const f=e.target.files[0];if(f)await loadJSON(f);e.target.value=''};
+$('audio').onchange=e=>{if(audioURL)URL.revokeObjectURL(audioURL);const f=e.target.files[0];audioURL=f?URL.createObjectURL(f):null;msg(f?'動画用の音声を選択しました。音声はJSONには含まれません。':'音声なし')};$('clearAudio').onclick=()=>{if(audioURL)URL.revokeObjectURL(audioURL);audioURL=null;$('audio').value='';msg('動画の音声を外しました。')};
+$('record').onclick=async()=>{if(recording)return;if(mode==='meeting')setMode('playback');if(!canvas.captureStream||!window.MediaRecorder){msg('このブラウザでは動画保存に対応していません。');return}const mime=['video/mp4','video/webm;codecs=vp9','video/webm'].find(x=>MediaRecorder.isTypeSupported(x));if(!mime){msg('このブラウザでは動画保存できません。');return}let stream=canvas.captureStream(30),context=null,source=null,audioEl=null,dest=null;let cleanupAudio=()=>{};
+ try{if(audioURL){audioEl=new Audio(audioURL);audioEl.crossOrigin='anonymous';await new Promise((resolve,reject)=>{audioEl.onloadedmetadata=resolve;audioEl.onerror=()=>reject(Error('音声の読み込みに失敗しました'));audioEl.load()});context=new AudioContext();source=context.createMediaElementSource(audioEl);dest=context.createMediaStreamDestination();source.connect(dest);for(const tr of dest.stream.getAudioTracks())stream.addTrack(tr);cleanupAudio=()=>{audioEl.pause();source.disconnect();context.close()}}const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5000000});recording=true;const controls=[...document.querySelectorAll('button,input,select')];controls.forEach(el=>el.disabled=true);let chunks=[],timer;function cleanup(){clearTimeout(timer);stop();recording=false;controls.forEach(el=>el.disabled=false);cleanupAudio();stream.getTracks().forEach(tr=>tr.stop())}rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};rec.onerror=()=>{cleanup();msg('動画保存に失敗しました')};rec.onstop=()=>{cleanup();download(new Blob(chunks,{type:mime}),(board.title||'作戦動画')+(mime.includes('mp4')?'.mp4':'.webm'));msg('動画を保存しました。')};progress=0;render();rec.start();if(audioEl){audioEl.currentTime=0;await context.resume();audioEl.play().catch(()=>{})}playOrigin=performance.now();playing=true;msg('作戦を録画しています。この画面を閉じないでください。');timer=setTimeout(()=>{if(rec.state==='recording')rec.stop()},totalSeconds()*1000/num($('rate').value,1)+400);
+ }catch(err){recording=false;cleanupAudio();stream.getTracks().forEach(tr=>tr.stop());msg('録画を開始できません：'+err.message)}};
+resetBoard();initPlans();setMode('meeting');timelineUI();applyViewport();offerRestore().catch(e=>{autosaveReady=true;autosaveStatus('⚠ 自動保存を読み込めません');msg('保存領域の確認に失敗しました：'+e.message)});window.__BOARD_TEST__={getBoard:()=>deep(board),totalSeconds,routeState,nearest,importLegacy:loadLegacy,setProgress:v=>{stop();progress=clamp(v);render()},getSelected:()=>unitId,getMode:()=>mode,getView:()=>({zoom,panX,panY}),setMode,resetLive:()=>{$('resetLive').click()},getPlans:()=>plans.map(p=>({id:p.id,name:p.name,board:deep(p.board)})),getActivePlan:()=>activePlanId,getSelection:()=>[...selectedIds],getHistory:()=>({undo:history.length,redo:redoHistory.length}),getSpecials:()=>board.units.filter(u=>u.side==='special').map(u=>deep(u)),getWaitContext:()=>({visible:!$('waitContextMenu').hidden,id:wcUnitId,branch:wcBranchIndex}),presenceAt:(id,t)=>deep(presenceAt(board.units.find(u=>u.id===id),t)),addEvents,beginSpawnPlacement,beginSpawnRoute,getActionPlacement:()=>deep(actionPlacement||spawnRouteEdit||null),setActionSeconds,flushAutosave,importWorkspace,workspaceData};
+})();
+</script></body></html>
