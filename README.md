@@ -1,4 +1,4 @@
-# チュール式戦術ボード v0.77.2
+# チュール式戦術ボード v0.77.3
 
 キングダム覇道の作戦会議と進軍経路図を作る、単一 HTML の戦術ボードです。
 
@@ -15,7 +15,8 @@ https://pumpkitten.github.io/churu-tactical-board/
 | 山砦 | 16 | https://pumpkitten.github.io/churu-tactical-board/?map=mountain |
 | 森砦 | 18 | https://pumpkitten.github.io/churu-tactical-board/?map=forest |
 | 丘砦 | 16 | https://pumpkitten.github.io/churu-tactical-board/?map=hill |
-| 城砦 | 26 | https://pumpkitten.github.io/churu-tactical-board/?map=castle |
+| 城砦（旧） | 26 | https://pumpkitten.github.io/churu-tactical-board/?map=castle |
+| 城砦（追加） | 26 | https://pumpkitten.github.io/churu-tactical-board/?map=castle-new |
 
 URL に `?map=...` を付けると、指定したマップが最初から表示されます。
 戦場選択欄の「🔗 マップURL」から、選択中のマップの URL をコピーすることもできます。
@@ -23,13 +24,13 @@ URL に `?map=...` を付けると、指定したマップが最初から表示�
 **安全対策:** ブラウザに別マップの自動保存がある場合は、既存の作戦を上書きしないよう確認します。
 大切な作戦データは切り替え前に JSON 保存してください。
 
-## v0.77 ～ v0.77.2 の主な変更点
+## v0.77 ～ v0.77.3 の主な変更点
 
-- 従来25施設マップを含む6種類の戦場に対応。
+- 従来25施設マップを含む7種類の戦場に対応。
 - 山砦の進入禁止12区域、丘砦の進入禁止2区域を登録。経路チェックおよび迂回機能に対応。
 - 城砦の17・18・23番は「兵器陣」。占拠から60秒経過すると井闌車が出現するゲームルールを記録（再生時の自動出現は未対応）。
 - v0.77.1でマップごとの共有用URLに対応。
-- **v0.77.2:** 城砦マップを最新版の画像・施設座標に差し替え。施設は赤20件・青6件で番号1～26。
+- **v0.77.3:** v0.77.2の城砦差し替えを取り消し、旧城砦を完全に復元。新画像は独立した7番目の「城砦（追加）」として登録しました。旧URL・旧施設番号を維持し、追加マップは `?map=castle-new` です。
 - v0.76の通常作戦JSON読み込みを維持。
 
 ## 使い方
