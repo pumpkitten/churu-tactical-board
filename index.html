@@ -277,7 +277,7 @@ button.source-upload:hover{background:#aefff0;color:#062a38;border-color:#bbffec
 </div>
 <div class="workspace" aria-label="作戦案の管理">
   <div class="field"><label for="planPicker">作戦案（切り替え・比較）</label><select id="planPicker" class="select-plan"></select></div>
-  <div class="actions"><button id="planDuplicate" type="button">⧉ この案を複製</button><button id="planNew" type="button">＋ 白紙案</button><button id="planRename" type="button">✎ 名前変更</button><button id="planDelete" class="danger" type="button">🗑 案を削除</button><button id="restoreAutosave" type="button" title="保存された作業に戻す">♻ 自動保存を復元</button><span id="autosaveStatus" aria-live="polite">自動保存の確認中…</span></div>
+  <div class="actions"><button id="planDuplicate" type="button">⧉ この案を複製</button><button id="planNew" type="button">＋ 白紙案</button><button id="planRename" type="button">✎ 名前変更</button><button id="planDelete" class="danger" type="button">🗑 案を削除</button><button id="restoreAutosave" type="button" title="保存された作業に戻す">♻ 自動保存を復元</button><button id="loadBushinDefault" type="button" title="武神襲来の初期作戦を読み込む（現在の作業は置き換わります）">⚔ 武神襲来 初期作戦</button><span id="autosaveStatus" aria-live="polite">自動保存の確認中…</span></div>
 </div>
 <div class="quickbar" role="toolbar" aria-label="戦術ボードの操作ツール">
 <div class="toolcluster"><span class="tool-label">駒の追加</span><div class="cluster-buttons"><button id="quickAddFriend" type="button">＋ 味方</button><button id="quickAddEnemy" type="button">＋ 敵</button><button id="quickAddBoss" type="button">◆ 総大将</button><button id="quickAddStrong" type="button">◇ 強敵</button><button id="quickAddSiege" type="button">▣ 井闌車</button></div></div>
@@ -535,6 +535,19 @@ async function importWorkspace(data){selectedPinId=null;pinPlacing=false;pinMove
  if([10,11,12].includes(data.version)&&data.histories&&typeof data.histories==='object')for(const p of plans){const h=data.histories[p.id];if(!h)continue;try{const undo=Array.isArray(h.undo)?h.undo.slice(-30).map(x=>cleanBoard(deep(x))):[];const redo=Array.isArray(h.redo)?h.redo.slice(-30).map(x=>cleanBoard(deep(x))):[];planHistories[p.id]={undo,redo}}catch(e){/* corrupt history is discarded, plan remains valid */}}
  const active=plans.find(p=>p.id===activePlanId);board=deep(active.board);if($('mapPresetChoose')&&[...$('mapPresetChoose').options].some(o=>o.value===board.mapId))$('mapPresetChoose').value=board.mapId;history=planHistories[activePlanId].undo;redoHistory=planHistories[activePlanId].redo;unitId=board.units[0]?.id||null;selectedIds=new Set(unitId?[unitId]:[]);branchIdx=0;waitId=null;progress=0;$('rate').value=String([.5,1,2,4,8].includes(rate)?rate:1);refreshNextId();updatePlanUI();redrawUI();scheduleAutosave()}
 $('restoreAutosave').onclick=async()=>{const data=await storedWorkspace();if(!data){msg('復元できる自動保存データがありません。');return}if(!confirm('ブラウザに保存された作業で現在の内容を置き換えますか？'))return;try{await importWorkspace(data);msg('自動保存から'+plans.length+'案を復元しました。')}catch(e){msg('復元に失敗しました：'+e.message)}};
+// Default scenario for new visitors; all seven original maps remain available.
+async function fetchBushinDefault(){
+ const response=await fetch('./bushin-default.json',{cache:'no-cache'});
+ if(!response.ok)throw Error('初期作戦データが取得できません（HTTP '+response.status+'）');
+ const data=await response.json();
+ if(data?.format!=='shirasu-tactical-board'||data.version!==12||!Array.isArray(data.plans))throw Error('初期作戦データの形式が正しくありません');
+ return data;
+}
+$('loadBushinDefault').onclick=async()=>{
+ if(!confirm('「武神襲来」の初期作戦を読み込みますか？\n現在の作業は置き換わります。必要なら先に「保存」でJSONを退避してください。'))return;
+ try{await importWorkspace(await fetchBushinDefault());msg('「武神襲来」の初期作戦を読み込みました。');}
+ catch(e){msg('初期作戦の読み込みに失敗しました：'+e.message)}
+};
 async function offerRestore(){
  const selected=incomingMapID();
  const data=await storedWorkspace();
@@ -552,7 +565,10 @@ async function offerRestore(){
   autosaveReady=true;
   return;
  }
- if(data){autosaveStatus('前回の自動保存あり');if(confirm('前回の自動保存があります。作戦案と仮配置を復元しますか？')){try{await importWorkspace(data);msg('前回の作業を復元しました。')}catch(e){msg('自動保存の復元に失敗しました：'+e.message)}}else autosaveStatus('復元せず開始（変更後から自動保存）')}else autosaveStatus('自動保存が有効です');autosaveReady=true;
+ if(data){autosaveStatus('前回の自動保存あり');if(confirm('前回の自動保存があります。作戦案と仮配置を復元しますか？')){try{await importWorkspace(data);msg('前回の作業を復元しました。')}catch(e){msg('自動保存の復元に失敗しました：'+e.message)}}else autosaveStatus('復元せず開始（変更後から自動保存）')}else{
+  try{await importWorkspace(await fetchBushinDefault());msg('「武神襲来」を初期作戦として読み込みました。');}
+  catch(e){autosaveStatus('⚠ 初期作戦を読み込めません');msg('初期作戦の読み込みに失敗しました：'+e.message)}
+ }autosaveReady=true;
 }
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&autosaveTimer)flushAutosave()});window.addEventListener('pagehide',()=>{if(autosaveTimer)flushAutosave()});
 
